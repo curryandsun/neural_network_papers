@@ -54,6 +54,12 @@
     - 二是从calibration的角度说明了label smooth的作用。
     - 三是说明了虽然label smooth可以提高模型精度，但这样的模型作为知识蒸馏的teacher模型却是不好的，因为label smooth损失了类之间的相关性，而这正是知识蒸馏所需要的。
 
+- [On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599) (ICML2017)
+    - 4分
+    - 文中指出了虽然近年来nn的acc不断提高，但是calibration却是在降低的(如Resnet)，也就是说模型最后输出的confidence并不能真的代表置信度。
+    - 首先给出了一个利用柱状图思想来计算ECE的方法，可以衡量模型的calibration程度。实验表明，增加模型宽度/深度，BN层以及weight decay都会降低模型的calibration。
+    - 其次在platt scaling的基础上，提出了temperature scaling方法，可以不改变测试acc。两者都是在训练集上训练后，固定模型参数再通过验证集来训练后处理方法的参数。
+
 - [Regularizing Neural Networks By Penalizing Confident Output Distributions](https://arxiv.org/abs/1701.06548) (ICLR2017)
     - 3分
     - Hinton出品，介绍了一种神经网络Loss的正则项，具体来说就是在CE之后加了一项关于输出分布的负熵的惩罚项。输出分布某项的置信度越高，则熵越低，负熵越高，因此模型将更不容易overconfident。最后说明了uniform的label smooth也是在干类似的事情。
