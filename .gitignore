@@ -3,6 +3,7 @@ label smooth/
 long-tail/
 nn/
 semi-supervised/
+self-supervised/
 
 *.pdf
 

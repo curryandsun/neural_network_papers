@@ -26,6 +26,7 @@
   - [Label Smooth](#label-smooth)
   - [Long-tail](#long-tail)
   - [Semi-supervised](#semi-supervised)
+  - [Unsupervised](#unsupervised)
 
 
 # Papers
@@ -100,3 +101,13 @@
 
 > 半监督学习。
 
+## Unsupervised
+
+> 无监督学习(包括自监督学习)。
+
+- [Unsupervised Feature Learning via Non-Parametric Instance Discrimination](https://arxiv.org/abs/1805.01978) (CVPR18_spotlight)
+    - 4分
+    - motivation:尽管监督学习的目标只是分类，但模型可以隐式地学习到类别之间的相似度。那么若每一个样本都有一个标签，用instance-wise代替class-wise，这样也可以学到样本的特征表示，同样隐含着类别的相似度信息。
+    - class-wise转为instance-wise后不能简单应用CE(类别太多)，因此采用了Non-Parametric的Softmax。
+    - 模型学到特征后可以直接用KNN分类，并且模型参数也可以作为pretrain移植到别的任务上去，这样就类似于半监督学习。
+    - 思考:样本间的相似度其实无需监督信息就可以学到。而类间的相似度其实隐含在监督学习的学习过程中,其实也就是隐含在c * c的prob_mat之中。
