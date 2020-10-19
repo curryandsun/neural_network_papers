@@ -105,9 +105,21 @@
 
 > 无监督学习(包括自监督学习)。
 
-- [Unsupervised Feature Learning via Non-Parametric Instance Discrimination](https://arxiv.org/abs/1805.01978) (CVPR18_spotlight)
+- [Unsupervised Feature Learning via Non-Parametric Instance Discrimination](https://arxiv.org/abs/1805.01978) (CVPR2018_spotlight)
     - 4分
     - motivation:尽管监督学习的目标只是分类，但模型可以隐式地学习到类别之间的相似度。那么若每一个样本都有一个标签，用instance-wise代替class-wise，这样也可以学到样本的特征表示，同样隐含着类别的相似度信息。
-    - class-wise转为instance-wise后不能简单应用CE(类别太多)，因此采用了Non-Parametric的Softmax。
+    - class-wise转为instance-wise后不能简单应用CE(类别太多)，因此采用了NCE和Memory Bank。
     - 模型学到特征后可以直接用KNN分类，并且模型参数也可以作为pretrain移植到别的任务上去，这样就类似于半监督学习。
-    - 思考:样本间的相似度其实无需监督信息就可以学到。而类间的相似度其实隐含在监督学习的学习过程中,其实也就是隐含在c * c的prob_mat之中。
+
+- [Unsupervised Embedding Learning via Invariant and Spreading Instance Feature](https://arxiv.org/abs/1904.03436) (CVPR2019)
+    - 4分
+    - NPID方法用到了Memory Bank,使得t时刻encoder得到的query只能和t-1时刻得到的dictionary来构建正负pair，再进行Loss计算，效果不够好。
+    - 该方法用augmentation的方法构建正pair，用mini-batch中的其他样本构建负pair，实现了真正的instance-level的对比学习。
+    - 局限:负样本dictionary仍然局限于当前的mini-batch，导致数目不够。
+    
+- [Momentum Contrast for Unsupervised Visual Representation Learning](https://arxiv.org/abs/1911.05722) (CVPR2020)
+    - 5分
+    - KaiMing He出品。思路与CVPR19 ISIF方法类似，主要有以下几点改进:
+        - 采用了queue的方式构建负样本dictionary，使得其size可以大大超过mini-batch的size。这种方法比Memory Bank巧妙得多,使用内存更小(k < n)，可以丢掉outdated的mini-batch的信息。
+        - 对于f_k的参数，采用了momentum的变化方式，使得f_q的参数可以更平滑地影响f_k。
+        - shuffle batch normalization:multi-GPU的设置下，对每一个mini-batch，shuffle f_k的samples order，而f_q的保持不变，这样就保证了每个GPU上的两个encoder的subset是不同的。
