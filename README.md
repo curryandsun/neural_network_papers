@@ -110,12 +110,19 @@
     - motivation:尽管监督学习的目标只是分类，但模型可以隐式地学习到类别之间的相似度。那么若每一个样本都有一个标签，用instance-wise代替class-wise，这样也可以学到样本的特征表示，同样隐含着类别的相似度信息。
     - class-wise转为instance-wise后不能简单应用CE(类别太多)，因此采用了NCE和Memory Bank。
     - 模型学到特征后可以直接用KNN分类，并且模型参数也可以作为pretrain移植到别的任务上去，这样就类似于半监督学习。
+    - 可以说是Instance Discrimination这一类方法的开山之作。
 
 - [Unsupervised Embedding Learning via Invariant and Spreading Instance Feature](https://arxiv.org/abs/1904.03436) (CVPR2019)
     - 4分
-    - NPID方法用到了Memory Bank,使得t时刻encoder得到的query只能和t-1时刻得到的dictionary来构建正负pair，再进行Loss计算，效果不够好。
+    - NPID方法用到了Memory Bank,使得t时刻encoder得到的query只能和t-1时刻得到的dictionary来构建正负pair，再进行Loss计算，这样显然效果不够好。
     - 该方法用augmentation的方法构建正pair，用mini-batch中的其他样本构建负pair，实现了真正的instance-level的对比学习。
-    - 局限:负样本dictionary仍然局限于当前的mini-batch，导致数目不够。
+    - 局限:基于Memory Bank，其中信息已经outdated。
+
+- [Local aggregation for unsupervised learning of visual embeddings](https://arxiv.org/abs/1903.12355) (ICCV2019)
+    - 4分
+    - Memory Bank中的采样是随机的，显然没有充分利用其中信息。本文中作者定义了两个集合Bi和Ci，可以简单理解为Bi是Memory Bank中离目标特征vi较近的集合，而Ci是更近的集合。文中Bi从V中选取了k个最近点，而Ci则是通过聚类得到。
+    - 正样本选自Bi^Ci，负样本则是选自Bi-Bi^Ci。相当于从V中选择了价值更大的进行Loss计算。
+    - 仍局限于Memory Bank，但是提供了一种采样的新思路。即从与vi更相近的点中采样。
     
 - [Momentum Contrast for Unsupervised Visual Representation Learning](https://arxiv.org/abs/1911.05722) (CVPR2020)
     - 5分
