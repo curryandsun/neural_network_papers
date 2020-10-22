@@ -6,6 +6,7 @@ semi-supervised/
 self-supervised/
 
 *.pdf
+*.py
 
 # IPython notebook checkpoints
 .ipynb_checkpoints
