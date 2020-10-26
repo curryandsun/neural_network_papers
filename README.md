@@ -80,12 +80,18 @@
     - 这篇文章的related work写的很不错，非常清晰地涵盖了最近研究长尾分布的主要论文。
     - 文中通过对平衡后验概率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。与我们最近的一个idea非常相似，很难受。
 
+- [Long-tailed Recognition by Routing Diverse Distribution-Aware Experts](https://arxiv.org/abs/2010.01809) (arXiv2020)
+    - 4分
+    - 集成学习的思想。stage1学experts的参数，两个Loss要求多个experts好而不同(每个experts可以关注不同的类)。stage2学对每个instance具体的experts的选择方法。
+    - 为了降低模型复杂度：网络中所有channel变为四分之一，网络前一部分参数共享，stage2专家分配。
+    - 实验效果好到离谱，同时提升head类和tail类，且各大任务都能提升6%左右。
+
 - [Deep Representation Learning on Long-tailed Data: A Learnable EmbeddingAugmentation Perspective](https://arxiv.org/abs/2002.10826) (CVPR2020)
 - [Memory-based Jitter: Improving Visual Recognition on Long-tailed Data with Diversity In Memory](https://arxiv.org/abs/2008.09809) (arXiv2020)
     - 4分
     - [知乎原作者解析](https://zhuanlan.zhihu.com/p/112248291)
     - 以上两篇出自同一作者，本质思想类似:都是希望从特征空间层面来扩充tail类的表示。
-    - 第一篇是从head类中学到一个分布再扩充到tail类；第二篇应该是受到MoCo的启发，同样存储一个特征的memory queue，但是这里的特征是带标签地，并且做了一个反频率采样，再把memory queue中的特征扩充到所有类的特征空间中，使得在特征空间中类数目比较均匀。
+    - 第一篇是从head类中学到一个分布再扩充到tail类；第二篇应该是受到MoCo的启发，同样存储一个特征的memory queue，但是这里的特征是带标签的，并且做了一个反频率采样，再把memory queue中的特征扩充到所有类的特征空间中，使得在特征空间中类数目比较均匀。
 
 - [Decoupling Representation and Classifier for Long-Tailed Recognition](https://arxiv.org/abs/1910.09217) (ICLR2020)
     - 5分
