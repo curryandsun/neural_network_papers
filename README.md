@@ -80,13 +80,27 @@
     - 这篇文章的related work写的很不错，非常清晰地涵盖了最近研究长尾分布的主要论文。
     - 文中通过对平衡后验概率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。与我们最近的一个idea非常相似，很难受。
 
-- [Decoupling Representation and Classifier for Long-Tailed Recognition](https://arxiv.org/abs/1910.09217) (ICLR2020)
+- [Deep Representation Learning on Long-tailed Data: A Learnable EmbeddingAugmentation Perspective](https://arxiv.org/abs/2002.10826) (CVPR2020)
+- [Memory-based Jitter: Improving Visual Recognition on Long-tailed Data with Diversity In Memory](https://arxiv.org/abs/2008.09809) (arXiv2020)
     - 4分
+    - [知乎原作者解析](https://zhuanlan.zhihu.com/p/112248291)
+    - 以上两篇出自同一作者，本质思想类似:都是希望从特征空间层面来扩充tail类的表示。
+    - 第一篇是从head类中学到一个分布再扩充到tail类；第二篇应该是受到MoCo的启发，同样存储一个特征的memory queue，但是这里的特征是带标签地，并且做了一个反频率采样，再把memory queue中的特征扩充到所有类的特征空间中，使得在特征空间中类数目比较均匀。
+
+- [Decoupling Representation and Classifier for Long-Tailed Recognition](https://arxiv.org/abs/1910.09217) (ICLR2020)
+    - 5分
     - 应该是第一次将nn中Long-tail问题分为特征提取和分类两部分。实验表明即使是在Long-tail的数据集中，nn依然可以学到良好的特征表示，但需要对分类器W做后处理。文中根据实验现象提出了W对每一类进行L2Norm的方法。
 
 - [BBN: Bilateral-Branch Network with Cumulative Learningfor Long-Tailed Visual Recognition](https://arxiv.org/abs/1912.02413) (CVPR2020)
     - 3分
-    - 提出了BBN网络结构来解决Long-tail问题，实验效果非常优秀。但是实际上在对比之前的方法时并不算公平，因为网络多了近乎一倍的参数量，且每个batch采样也是两倍。
+    - 提出了BBN网络结构来解决Long-tail问题，本质思想与Decoupling类似，希望特征学习阶段是不平衡的而分类器学习阶段是平衡的。
+	- 实验效果非常优秀，但是实际上在对比之前的方法时并不算公平，因为网络多了近乎一倍的参数量，且每个batch采样也是两倍。
+
+- [Rethinking the Value of Labels for ImprovingClass-Imbalanced Learning](https://arxiv.org/abs/2006.07529) (NIPS2020)
+    - 4分
+    - [知乎原作者解析](https://zhuanlan.zhihu.com/p/259710601)
+	- 其中半监督学习框架引入了其他的unlabeled data，文中也讨论了如何选取这些unlabeled data。
+	- 利用自监督对长尾数据集预训练，再使用其他任何的长尾学习算法。
 
 - [Learning imbalanced datasets with label-distribution-aware margin loss](https://arxiv.org/abs/1906.07413) (NIPS2019)
     - 4分
