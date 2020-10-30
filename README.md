@@ -25,8 +25,10 @@
   - [Neural Network](#neural-network)
   - [Label Smooth](#label-smooth)
   - [Long-tail](#long-tail)
-  - [Semi-supervised](#semi-supervised)
   - [Unsupervised](#unsupervised)
+  - [Semi-supervised](#semi-supervised)
+  - [Knowledge Distilling](#knowledge-distilling)
+  - [Domain Adaptation](#domain-adaptation)
 
 
 # Papers
@@ -117,10 +119,6 @@
     - 文中提出在采样时会出现一些特征重复的现象，因此样本数并不能完全代表采样的覆盖情况。作者通过一些假设，简单推倒出一个有效样本数的概念，并以此代替频率对Loss进行修正。思想非常简单清晰。
 
 
-## Semi-supervised
-
-> 半监督学习。
-
 ## Unsupervised
 
 > 无监督学习(包括自监督学习)。
@@ -169,6 +167,31 @@
     - DeepCluster方法，思路很简单:将通过CNN后的特征进行聚类，再用聚类的结果作为伪标签反向传播到CNN。
 
 
+## Semi-supervised
+
+> 半监督学习。
+
+
+## knowledge-distilling
+
+> 知识蒸馏。
+
+- [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) (NIPS2014)
+    - 5分
+    - Hinton出品，知识蒸馏开山之作。
+    - 属于logit级别的知识蒸馏。student网络一方面用带温度的softmax去学习teacher网络的分布，一方面用hard的softmax去学习真实标签。
+    - teacher网络很大很复杂，他的soft标签可以包含一些类之间的关系，而这些是hard标签所没有的，因此可以把这部分看作其学到的“知识”，再交由student小网络进行学习。
+
+- [Deep mutual learning](https://arxiv.org/abs/1706.00384) (CVPR2018)
+    - 3分
+    - 两个网络mutual的训练，将输出分布求KL散度作为Loss的一项。
+    - 目标是两个网络之间相互指导训练(互相趋同)，最后两个网络都可以拿出来用。Long-tail问题中多专家框架和这个很像，但是是将多专家输出分布的KL散度之间最大化(互相不同)，然后集成起来用。
+    - 一个模型学到的概率分布可以看作是模型学到了数据内部的一个本质规律，就可以用来指导另外一个模型。也可以看作一个正则化的手段，类似于一种更加贴合数据本身规律的label smooth。
+
+
+## domain-adaptation
+
+> 领域自适应。
 
 
 
