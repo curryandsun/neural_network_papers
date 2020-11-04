@@ -5,6 +5,7 @@ nn/
 semi-supervised/
 self-supervised/
 domain adaptation/
+fine-grained/
 knowledge distilling/
 
 

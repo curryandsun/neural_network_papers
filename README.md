@@ -28,7 +28,7 @@
   - [Unsupervised](#unsupervised)
   - [Semi-supervised](#semi-supervised)
   - [Knowledge Distilling](#knowledge-distilling)
-  - [Domain Adaptation](#domain-adaptation)
+  - [Fine-grained](#fine-grained)
 
 
 # Papers
@@ -90,7 +90,7 @@
 
 - [Deep Representation Learning on Long-tailed Data: A Learnable EmbeddingAugmentation Perspective](https://arxiv.org/abs/2002.10826) (CVPR2020)
 - [Memory-based Jitter: Improving Visual Recognition on Long-tailed Data with Diversity In Memory](https://arxiv.org/abs/2008.09809) (arXiv2020)
-    - 4分
+    - 3分
     - [知乎原作者解析](https://zhuanlan.zhihu.com/p/112248291)
     - 以上两篇出自同一作者，本质思想类似:都是希望从特征空间层面来扩充tail类的表示。
     - 第一篇是从head类中学到一个分布再扩充到tail类；第二篇应该是受到MoCo的启发，同样存储一个特征的memory queue，但是这里的特征是带标签的，并且做了一个反频率采样，再把memory queue中的特征扩充到所有类的特征空间中，使得在特征空间中类数目比较均匀。
@@ -100,15 +100,20 @@
     - 应该是第一次将nn中Long-tail问题分为特征提取和分类两部分。实验表明即使是在Long-tail的数据集中，nn依然可以学到良好的特征表示，但需要对分类器W做后处理。文中根据实验现象提出了W对每一类进行L2Norm的方法。
 
 - [BBN: Bilateral-Branch Network with Cumulative Learningfor Long-Tailed Visual Recognition](https://arxiv.org/abs/1912.02413) (CVPR2020_oral)
-    - 3分
+    - 4分
     - 提出了BBN网络结构来解决Long-tail问题，本质思想与Decoupling类似，希望特征学习阶段是不平衡的而分类器学习阶段是平衡的。
 	- 实验效果非常优秀，但是实际上在对比之前的方法时并不算公平，因为网络多了近乎一倍的参数量，且每个batch采样也是两倍。
 
-- [Rethinking the Value of Labels for ImprovingClass-Imbalanced Learning](https://arxiv.org/abs/2006.07529) (NIPS2020)
+- [Rethinking the Value of Labels for Improving Class-Imbalanced Learning](https://arxiv.org/abs/2006.07529) (NIPS2020)
     - 4分
     - [知乎原作者解析](https://zhuanlan.zhihu.com/p/259710601)
 	- 其中半监督学习框架引入了其他的unlabeled data，文中也讨论了如何选取这些unlabeled data。
 	- 利用自监督对长尾数据集预训练，再使用其他任何的长尾学习算法。
+
+- [Learning From Multiple Experts: Self-paced Knowledge Distillation for Long-tailed Classification](https://arxiv.org/abs/2001.01536) (ECCV2020_spotlight)
+    - 4分
+    - motivation:如果把Long-tail数据集分为多个子集，那么在每个子集中Long-tail的程度就会减缓，分开训练后的精度就会提高。
+    - 因此，首先在这些子集上训练出来多个专家。这些专家可以起到两个作用:1.通过置信度来告诉student网络每个样本的难度，也就对应文中的课程学习模块。2.对student网络进行知识蒸馏。
 
 - [Learning imbalanced datasets with label-distribution-aware margin loss](https://arxiv.org/abs/1906.07413) (NIPS2019)
     - 4分
@@ -189,10 +194,14 @@
     - 一个模型学到的概率分布可以看作是模型学到了数据内部的一个本质规律，就可以用来指导另外一个模型。也可以看作一个正则化的手段，类似于一种更加贴合数据本身规律的label smooth。
 
 
-## domain-adaptation
+## fine-grained
 
-> 领域自适应。
+> 细粒度识别。
 
-
+- [Pairwiseconfusion for fine-grained visual classification](https://arxiv.org/abs/1705.08016) (ECCV2018)
+- [natural world distribution via adaptive confusion energy regularization](https://openreview.net/forum?id=kKwFlM32HV5) (ICLR2021 under review)
+    - 3分
+    - motivation:两篇文章的出发点非常类似，只不过后者考虑了Long-tail的情况。在细粒度识别中，类间本身就非常相似，这就导致网络的输入非常相似，但是输出却是不同的标签，容易使得网络过于关注样本级别的特征，造成过拟合。因此提出了PairwiseConfusion模块，混淆pair中两个输出的概率分布。
+    - 个人感觉这里的PairwiseConfusion方法和motivation的关联并不是那么紧密，反而更像是一种label smooth。只不过label smooth中以均匀分布作为一个正则化项，而这个方法使用pair中另一个分布的输出作为正则化项，但本质都是通过防止网络overconfident来抑制过拟合的情况。
 
 
