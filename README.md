@@ -199,6 +199,13 @@
     - 可以理解为更加真实的label smooth，因为是把相同标签的样本的输出看成soft label。可以说和Deep mutual learning结构几乎完全相同，只不过是使用了同一个网络以及pair的输入。另一方面和PairwiseConfusion完全相反。
     - 不得不感叹2020年了，还能这样水一篇CVPR。
 
+- [Revisiting Knowledge Distillation via Label Smoothing Regularization](https://arxiv.org/abs/1909.11723) (CVPR2020)
+    - 5分
+    - motivation:在实验中发现两点不符合常理的现象:1.student网络也能指导teacher网络。2.准确率很低的teacher网络也能指导student网络。
+    - 非常清晰地分析了KD和label smooth之间的关系。两者形式上本身就非常相似，label smooth可以看成是人工设计的一直输出均匀分布的virtual teacher，同理KD也可以看成是更强的可学习的label smooth。
+    - 由此提出了TF-KD，一种是直接拿pretrain的student网络当成teacher，一种是将soft label加上temperature。
+    - 文章思路非常清晰，idea也很好，但是实验也并不能表明TF-KD就比LSR好多少，也没有去探究normal-KD比TF-KD能好在哪。
+
 
 ## Fine-grained
 
