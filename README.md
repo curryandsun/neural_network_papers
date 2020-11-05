@@ -177,7 +177,7 @@
 > 半监督学习。
 
 
-## knowledge-distilling
+## Knowledge Distilling
 
 > 知识蒸馏。
 
@@ -193,8 +193,14 @@
     - 目标是两个网络之间相互指导训练(互相趋同)，最后两个网络都可以拿出来用。Long-tail问题中多专家框架和这个很像，但是是将多专家输出分布的KL散度之间最大化(互相不同)，然后集成起来用。
     - 一个模型学到的概率分布可以看作是模型学到了数据内部的一个本质规律，就可以用来指导另外一个模型。也可以看作一个正则化的手段，类似于一种更加贴合数据本身规律的label smooth。
 
+- [Regularizing Class-wise Predictions via Self-knowledge Distillation](https://arxiv.org/abs/2003.13964) (CVPR2020)
+    - 3分
+    - self-kd,或可以理解为正则化。流程非常简单，取标签相同的两个batch，对其输出概率求KL散度作为正则项损失，即要求标签相同的输入拥有更加相近的输出概率分布。
+    - 可以理解为更加真实的label smooth，因为是把相同标签的样本的输出看成soft label。可以说和Deep mutual learning结构几乎完全相同，只不过是使用了同一个网络以及pair的输入。另一方面和PairwiseConfusion完全相反。
+    - 不得不感叹2020年了，还能这样水一篇CVPR。
 
-## fine-grained
+
+## Fine-grained
 
 > 细粒度识别。
 
