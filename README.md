@@ -29,6 +29,7 @@
   - [Semi-supervised](#semi-supervised)
   - [Knowledge Distilling](#knowledge-distilling)
   - [Fine-grained](#fine-grained)
+  - [Noisy label](#noisy-label)
 
 
 # Papers
@@ -118,10 +119,12 @@
 - [Learning imbalanced datasets with label-distribution-aware margin loss](https://arxiv.org/abs/1906.07413) (NIPS2019)
     - 4分
     - 从margin的角度提出了LDAMLoss，还有DRW的训练方法，有一些理论分析，被后续大量工作作为baseline。
+    - 关于DRW：按照样本逆频率reweight Loss是一种常见的做法，目的是让每一类的Loss是均衡的，但这种做法往往只在训练初期管用。因为当你reweight每一类的Loss之后，小类的样本会获得更大的Loss，经过一轮的训练以后，其Loss会降得更低，重新使得各类Loss回归到不平衡的状态。
+    - 因此DRW这个方法可以看成是一种刺激网络突然更加关注小类的做法，往往在具体实验中呈现出acc突然上升然后慢慢回落的现象。DRW算是一种非常tricky的方法，强行在后期做一个刺激来提高acc。
 
 - [Class-balanced loss based on effective number of samples](https://arxiv.org/abs/1901.05555) (CVPR2019)
     - 4分
-    - 文中提出在采样时会出现一些特征重复的现象，因此样本数并不能完全代表采样的覆盖情况。作者通过一些假设，简单推倒出一个有效样本数的概念，并以此代替频率对Loss进行修正。思想非常简单清晰。
+    - 文中提出在采样时会出现一些特征重复的现象，因此样本数并不能完全代表采样的覆盖情况。作者通过一些假设，简单推倒出一个有效样本数的概念，并以此代替频率对Loss进行修正。思想非常简单清晰，被后续大量工作作为baseline。
 
 
 ## Unsupervised
@@ -176,6 +179,11 @@
 
 > 半监督学习。
 
+- [Self-training with Noisy Student improves ImageNet classification](https://arxiv.org/abs/1911.04252) (CVPR2020)
+    - 4分
+    - 与传统self-training或者KD的区别在于两点：Our  key  improvements  lie  in  adding  noise  to  the  student and using student models that are not smaller than the teacher.
+    - When applied to unlabeled data, noise has an important benefit of enforcing invariances in the decision function on both labeled and unlabeled data.
+
 
 ## Knowledge Distilling
 
@@ -217,4 +225,13 @@
     - motivation:两篇文章的出发点非常类似，只不过后者考虑了Long-tail的情况。在细粒度识别中，类间本身就非常相似，这就导致网络的输入非常相似，但是输出却是不同的标签，容易使得网络过于关注样本级别的特征，造成过拟合。因此提出了PairwiseConfusion模块，混淆pair中两个输出的概率分布。
     - 个人感觉这里的PairwiseConfusion方法和motivation的关联并不是那么紧密，反而更像是一种label smooth。只不过label smooth中以均匀分布作为一个正则化项，而这个方法使用pair中另一个分布的输出作为正则化项，但本质都是通过防止网络overconfident来抑制过拟合的情况。
 
+## Noisy Label
 
+> 标签噪声。
+
+- [Early-Learning Regularization Prevents Memorization of Noisy Labels](https://arxiv.org/abs/2007.00151) (NIPS2020)
+    - 5分
+    - motivation:DNN在noisy label的学习过程中有’early learning‘的现象，即首先fit正确的label，然后再去memorize错的label。因此，将早期模型的输出作为后期的一个正则化，有点像self-KD。
+    - 在KD中，拟合target用的是KL散度，但文中用的是内积。原因是KL散度相比内积对target的拟合程度更高，是想利用到dark knowledge，对本文来说会过拟合。
+    - 从梯度的角度说明了两点: (1) ensure that the contribution to the gradient from examples with clean labels remainslarge, and (2) neutralize the influence of the examples with wrong labels on the gradient.
+    - 文章的图画的是真好，看图就非常容易明白作者的idea。

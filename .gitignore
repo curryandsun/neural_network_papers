@@ -7,6 +7,7 @@ self-supervised/
 domain adaptation/
 fine-grained/
 knowledge distilling/
+noisy label/
 
 
 *.pdf
