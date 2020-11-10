@@ -46,6 +46,14 @@
     - 5分
     - mixup，实质上是给模型加上了一个线性系统的先验，实验效果非常显著。在本地跑mixup时，resnet18_cifar10可以提升一个点,resnet18_cifar100可以提升三个点。
 
+- [Understanding deep learningrequires rethinking generalization](https://arxiv.org/abs/1611.03530) (ICLR2017_Best paper)
+    - 4分
+    - 实验证明了无论是输入扰动还是标签扰动，神经网络都可以百分百的拟合训练数据。那么核心问题来了，明明网络只需要暴力地去记住训练集就好，为什么实际上却有着强大的泛化能力呢?
+    - 1.正则化:对泛化能力有提升，但是并不显著。
+    - 2.有限样本情况下，两层Relu神经网络的表达能力。
+    - 3.SGD隐式地提高了泛化能力。
+    - 总的来说，文章最终也没有解释为什么，但是给人们一些新的角度重新去思考这个问题。
+
 
 ## Label Smooth
 
@@ -189,18 +197,6 @@
 
 > 知识蒸馏。
 
-- [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) (NIPS2014)
-    - 5分
-    - Hinton出品，知识蒸馏开山之作。
-    - 属于logit级别的知识蒸馏。student网络一方面用带温度的softmax去学习teacher网络的分布，一方面用hard的softmax去学习真实标签。
-    - teacher网络很大很复杂，他的soft标签可以包含一些类之间的关系，而这些是hard标签所没有的，因此可以把这部分看作其学到的“知识”，再交由student小网络进行学习。
-
-- [Deep mutual learning](https://arxiv.org/abs/1706.00384) (CVPR2018)
-    - 3分
-    - 两个网络mutual的训练，将输出分布求KL散度作为Loss的一项。
-    - 目标是两个网络之间相互指导训练(互相趋同)，最后两个网络都可以拿出来用。Long-tail问题中多专家框架和这个很像，但是是将多专家输出分布的KL散度之间最大化(互相不同)，然后集成起来用。
-    - 一个模型学到的概率分布可以看作是模型学到了数据内部的一个本质规律，就可以用来指导另外一个模型。也可以看作一个正则化的手段，类似于一种更加贴合数据本身规律的label smooth。
-
 - [Regularizing Class-wise Predictions via Self-knowledge Distillation](https://arxiv.org/abs/2003.13964) (CVPR2020)
     - 3分
     - self-kd,或可以理解为正则化。流程非常简单，取标签相同的两个batch，对其输出概率求KL散度作为正则项损失，即要求标签相同的输入拥有更加相近的输出概率分布。
@@ -214,6 +210,23 @@
     - 由此提出了TF-KD，一种是直接拿pretrain的student网络当成teacher，一种是将soft label加上temperature。
     - 文章思路非常清晰，idea也很好，但是实验也并不能表明TF-KD就比LSR好多少，也没有去探究normal-KD比TF-KD能好在哪。
 
+- [Be Your Own Teacher: Improve the Performance of Convolutional Neural Networks via Self Distillation](https://arxiv.org/abs/1905.08094) (ICCV2019)
+    - 4分
+    - self-kd第一篇?
+    - 要求每个浅层模型都具有独立判别的能力，且与深层模型接近。三项loss可以分别看成是：1.深度监督(DSN) 2.深层模型对浅层模型的输出分布监督 3.深层模型对浅层模型的feature监督。
+
+- [Deep mutual learning](https://arxiv.org/abs/1706.00384) (CVPR2018)
+    - 3分
+    - 两个网络mutual的训练，将输出分布求KL散度作为Loss的一项。
+    - 目标是两个网络之间相互指导训练(互相趋同)，最后两个网络都可以拿出来用。Long-tail问题中多专家框架和这个很像，但是是将多专家输出分布的KL散度之间最大化(互相不同)，然后集成起来用。
+    - 一个模型学到的概率分布可以看作是模型学到了数据内部的一个本质规律，就可以用来指导另外一个模型。也可以看作一个正则化的手段，类似于一种更加贴合数据本身规律的label smooth。
+
+- [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) (NIPS2014)
+    - 5分
+    - Hinton出品，知识蒸馏开山之作。
+    - 属于logit级别的知识蒸馏。student网络一方面用带温度的softmax去学习teacher网络的分布，一方面用hard的softmax去学习真实标签。
+    - teacher网络很大很复杂，他的soft标签可以包含一些类之间的关系，而这些是hard标签所没有的，因此可以把这部分看作其学到的“知识”，再交由student小网络进行学习。
+
 
 ## Fine-grained
 
@@ -225,13 +238,18 @@
     - motivation:两篇文章的出发点非常类似，只不过后者考虑了Long-tail的情况。在细粒度识别中，类间本身就非常相似，这就导致网络的输入非常相似，但是输出却是不同的标签，容易使得网络过于关注样本级别的特征，造成过拟合。因此提出了PairwiseConfusion模块，混淆pair中两个输出的概率分布。
     - 个人感觉这里的PairwiseConfusion方法和motivation的关联并不是那么紧密，反而更像是一种label smooth。只不过label smooth中以均匀分布作为一个正则化项，而这个方法使用pair中另一个分布的输出作为正则化项，但本质都是通过防止网络overconfident来抑制过拟合的情况。
 
+- [Fine-Grained Visual Classification viaProgressive Multi-Granularity Training ofJigsaw Patches](https://arxiv.org/abs/2003.03836) (ECCV2020)
+    - 3分
+    - motivation:we further argue that, one not only needs to identify parts and their most discriminative granularities, but meanwhile how parts at different granularities can be effectively merged.
+    - 文章的表述有些复杂，总而言之就是通过各种方法使得各种粒度的特征做融合。
+
 ## Noisy Label
 
 > 标签噪声。
 
 - [Early-Learning Regularization Prevents Memorization of Noisy Labels](https://arxiv.org/abs/2007.00151) (NIPS2020)
     - 5分
-    - motivation:DNN在noisy label的学习过程中有’early learning‘的现象，即首先fit正确的label，然后再去memorize错的label。因此，将早期模型的输出作为后期的一个正则化，有点像self-KD。
+    - motivation:DNN在noisy label的学习过程中有’early learning‘的现象:first use patterns, not brute force memorization, to fit real data，then memorize noisy label。因此，将早期模型的输出作为后期的一个正则化，有点像self-KD。
     - 在KD中，拟合target用的是KL散度，但文中用的是内积。原因是KL散度相比内积对target的拟合程度更高，是想利用到dark knowledge，对本文来说会过拟合。
-    - 从梯度的角度说明了两点: (1) ensure that the contribution to the gradient from examples with clean labels remainslarge, and (2) neutralize the influence of the examples with wrong labels on the gradient.
+    - 从梯度的角度说明了两点: (1) ensure that the contribution to the gradient from examples with clean labels remains large, and (2) neutralize the influence of the examples with wrong labels on the gradient.
     - 文章的图画的是真好，看图就非常容易明白作者的idea。
