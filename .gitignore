@@ -1,17 +1,9 @@
 # Project files
-label smooth/
-long-tail/
-nn/
-semi-supervised/
-self-supervised/
-domain adaptation/
-fine-grained/
-knowledge distilling/
-noisy label/
-
+*/*/
 
 *.pdf
 *.py
+*.xlsx
 
 # IPython notebook checkpoints
 .ipynb_checkpoints
