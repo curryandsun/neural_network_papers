@@ -23,6 +23,7 @@
 - [Table of Contents](#table-of-contents)
 - [Knowledge Distilling](#knowledge-distilling)
   - [Distilling From Logits](#distilling-from-logits)
+  - [Distilling From Features](#distilling-from-features)
   - [Self-KD](#self-KD)
 
 # Knowledge Distilling
@@ -46,7 +47,20 @@
     - 属于logit级别的知识蒸馏。student网络一方面用带温度的softmax去学习teacher网络的分布，一方面用hard的softmax去学习真实标签。
     - teacher网络很大很复杂，他的soft标签可以包含一些类之间的关系，而这些是hard标签所没有的，因此可以把这部分看作其学到的“知识”，再交由student小网络进行学习。
 
+## Distilling From Features
+
+> Features或Relations层面的蒸馏。
+
+- [Similarity-Preserving Knowledge Distillation](https://arxiv.org/abs/1907.09682) (ICCV2019)
+- [A Gift from Knowledge Distillation:Fast Optimization, Network Minimization and Transfer Learning](https://openaccess.thecvf.com/content_cvpr_2017/papers/Yim_A_Gift_From_CVPR_2017_paper.pdf) (CVPR2017)
+
+    - 4分
+    - 两篇文章都是从feature map的角度进行蒸馏。
+    - 第一篇由浅层feature map(b\*c\*h\*w)生成一个表示batch内样本间相似度的相似矩阵(b\*b)，对这个矩阵进行蒸馏。蒸馏的信息：batch内样本的相似度。
+    - 第二篇由一个样本两个不同层的feature map(c1\*h\*w和c2\*h\*w)生成FSP(c1\*c2),对其进行蒸馏。FSP：The extracted feature maps from two layers are used to generate the flow of solution procedure(FSP) matrix。即蒸馏不同layer间feature map的flow信息。
+
 ## Self-KD
+
 > 自蒸馏。
 
 - [Regularizing Class-wise Predictions via Self-knowledge Distillation](https://arxiv.org/abs/2003.13964) (CVPR2020)
