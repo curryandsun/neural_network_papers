@@ -19,22 +19,20 @@
 
 # Table of contents
 
-- [Neural Network](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Neural%20Network)
+- [Neural Network](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Neural%20Network)
 
-- [Label Smooth](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Label%20Smooth)
+- [Label Smooth](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Label%20Smooth)
 
-- [Long-tail](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Long-tail)
+- [Long-tail](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Long-tail)
 
-- [Knowledge Distilling](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Knowledge%20Distilling)
+- [Knowledge Distilling](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Knowledge%20Distilling)
 
-- [Unsupervised](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Unsupervised)
+- [Unsupervised](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Unsupervised)
 
-- [Semi-supervised](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Semi-supervised)
+- [Semi-supervised](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Semi-supervised)
 
-- [Fine-grained](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Fine-grained)
+- [Fine-grained](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Fine-grained)
 
-- [Noisy label](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Noisy%20label)
+- [Noisy label](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Noisy%20label)
 
-- [GCN](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/GCN)
-
-[知乎原作者解析](https://zhuanlan.zhihu.com/p/112248291)
+- [GCN](https://github.com/SunYiXuan98/neural_network_papers/tree/main/GCN)
