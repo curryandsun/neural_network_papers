@@ -19,58 +19,22 @@
 
 # Table of contents
 
-- [论文阅读笔记](#论文阅读笔记)
-- [Table of Contents](#table-of-contents)
-- [Papers](#papers)
-  - [Neural Network](#neural-network)
-  - [Label Smooth](#label-smooth)
-  - [Long-tail](#long-tail)
-  - [Knowledge Distilling](#knowledge-distilling)
-  - [Unsupervised](#unsupervised)
-  - [Semi-supervised](#semi-supervised)
-  - [Fine-grained](#fine-grained)
-  - [Noisy label](#noisy-label)
-  - [GCN](#gcn)
+- [Neural Network](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Neural%20Network)
 
+- [Label Smooth](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Label%20Smooth)
 
-# Papers
+- [Long-tail](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Long-tail)
 
-## Neural Network
+- [Knowledge Distilling](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Knowledge%20Distilling)
 
-> 有关神经网络的各类杂文，如可解释性,tricks等。
+- [Unsupervised](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Unsupervised)
 
-## Label Smooth
+- [Semi-supervised](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Semi-supervised)
 
-> label smooth于16年提出，本单元包括后续一系列应用以及解释(包括 calibration)的相关文章。
+- [Fine-grained](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Fine-grained)
 
-## Long-tail
+- [Noisy label](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/Noisy%20label)
 
-> 长尾分布问题，主要集中于图像分类。
+- [GCN](#https://github.com/SunYiXuan98/neural_network_papers/tree/main/GCN)
 
-## Knowledge Distilling
-
-> 知识蒸馏。
-
-## Unsupervised
-
-> 无监督学习(包括自监督学习,对比学习)。
-
-## Fine-grained
-
-> 细粒度识别。
-
-## Semi-supervised
-
-> 半监督学习。
-
-## Fine-grained
-
-> 细粒度识别。
-
-## Noisy Label
-
-> 标签噪声。
-
-## GCN
-
-> 图卷积神经网络。
+[知乎原作者解析](https://zhuanlan.zhihu.com/p/112248291)
