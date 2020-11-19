@@ -71,7 +71,6 @@
 
 - [Be Your Own Teacher: Improve the Performance of Convolutional Neural Networks via Self Distillation](https://arxiv.org/abs/1905.08094) (ICCV2019)
 - [MSD: Multi-Self-Distillation Learning via Multi-classifiers within Deep Neural Networks](https://arxiv.org/abs/1911.09418) (arXiv2019)
-2019_arXiv_
     - 4分
     - 这两篇非常类似，都属于self-kd。
     - 要求每个浅层模型都具有独立判别的能力，且与深层模型接近。三项loss可以分别看成是：1.深度监督(DSN) 2.深层模型对浅层模型的输出分布监督 3.深层模型对浅层模型的feature监督。
