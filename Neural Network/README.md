@@ -25,6 +25,7 @@
     - [Interpretability](#interpretability)
     - [Tricks](#tricks)
     - [Hard And Easy](#hard-and-easy)
+    - [Architecture](#architecture)
 
 # Neural Network
 
@@ -35,7 +36,7 @@
 > 神经网络的可解释性相关文章。
 
 - [Do Wide and Deep Networks Learn the Same Things? Uncovering How Neural Network Representations Vary with Width and Depth](https://arxiv.org/abs/2010.15327) (ICLR2021 under review)
-    - 4分
+    - 3分
     - 实验性的文章。发现了一个'block structure'现象:即Resnet相对于数据集过参数化后,有很多laryer输出相似的特征，即是冗余的。个人感觉这个现象是比较显然的，Resnet的跳接就是想做这样的事情。文中也没有讨论别的网络是否有这样的现象(reviewer也提到了这一点)。
     - 比较有意思的一点是，文中发现较深或者较宽的网络最终虽然有着相似的acc，但是对于对于某些类，两者的acc却差很多(好而不同?有集成的潜质)。甚至在某些类上，小型网络能比大型网络做的更好。
 
@@ -52,13 +53,12 @@
 > 神经网络的各种tricks。
 
 - [Bag of Tricks for Image Classification with Convolutional Neural Networks](https://arxiv.org/abs/1812.01187) (CVPR2019)
-    - 4分
+    - 3分
     - 记录了应用nn进行图像分类的各种tricks，第五章介绍的mixup,label smooth,知识蒸馏等都是非常有用的技巧。
 
 - [mixup: BEYOND EMPIRICAL RISK MINIMIZATION](https://arxiv.org/abs/1710.09412) (ICLR2018)
     - 5分
     - mixup，实质上是给模型加上了一个线性系统的先验，实验效果非常显著。在本地跑mixup时，resnet18_cifar10可以提升一个点,resnet18_cifar100可以提升三个点。
-
 
 ## Hard And Easy
 
@@ -69,3 +69,25 @@
     - 实验性的文章。文中阐述的有两点发现很有意思:
     - 1.The order in which different architectures learn the data is similar.神经网络学习时，存在一个order，且不同网络结构学习的order是类似的。这是符合我们直觉的，就是一个先易后难的order。
     - 2.We see that ResNet-50 first learns all the examples AlexNet does, then continues to learn new examples.大网络先和小网络学到同一批样本，再继续学习更加困难的样本。这和1是很类似的。
+
+## Architecture
+
+> 神经网络的结构。
+
+- [Squeeze-and-Excitation Networks](https://arxiv.org/abs/1709.01507) (CVPR2018)
+    - 3分
+    - SEnet:channel-wise attention。
+    - 建模通道之间的关系，通过网络的全局损失函数自适应的重新矫正通道之间的特征相应强度。是一个c尺度的attention，通过pool(->c\*1*1)+FC+sigmoid得到attention系数。对于Resnet来说，可以加入每一个Basicblock中。
+
+- [CBAM: Convolutional Block Attention Module](https://arxiv.org/abs/1807.06521) (ECCV2018)
+    - 3分
+    - channel-wise attention + spatial-wise attention。论文中称两者分别为'look what'和'look where'。
+    - 在SEnet的基础上加了一个spatial-wise attention。这是一个h\*w尺度的attention，通过channel-wise pool(->2\*h*w)+conv+sigmoid得到attention系数，同样可以加入每一个Basicblock中。
+
+- [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861) (CVPR2017)
+    - 4分
+    - 通过depthwise separable convolution(深度可分离卷积)降低网络计算量。
+    - 如一个5\*5\*16\*32(16->32:in_planes->out_planes)的卷积参数，转化为channel-wise的卷积加上一个conv1\*1将通道数扩展，即5\*5\*1\*16 + 1\*1\*16\*32。
+
+
+
