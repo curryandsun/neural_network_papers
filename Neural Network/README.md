@@ -48,6 +48,11 @@
     - 3.SGD隐式地提高了泛化能力。
     - 总的来说，文章最终也没有解释为什么，但是给人们一些新的角度重新去思考这个问题。
 
+- [Learning Deep Features for Discriminative Localization](https://arxiv.org/abs/1512.04150) (CVPR2016)
+    - 5分
+    - 方法简单，广泛用于可视化模型的spatial attention。
+    - 模型最后一层activation map经过GAP之后(X)再过Linear(W)层得到logits。通常认为W中的每个类向量可以表征对应的类，这篇文章则将这个类向量中的每个值对应到activation map每个channel的重要性，那么就可以对其做channel-wise的加权和，再upsample恢复到原尺寸就可以可视化模型到底关注了图像的哪些位置。
+
 ## Tricks
 
 > 神经网络的各种tricks。
@@ -65,10 +70,10 @@
 > 关于样本难易的相关文章。
 
 - [Let’s Agree to Agree: Neural Networks Share Classification Order on RealDatasets](https://arxiv.org/abs/1905.10854) (ICML2020)
-    - 4分
+    - 3分
     - 实验性的文章。文中阐述的有两点发现很有意思:
     - 1.The order in which different architectures learn the data is similar.神经网络学习时，存在一个order，且不同网络结构学习的order是类似的。这是符合我们直觉的，就是一个先易后难的order。
-    - 2.We see that ResNet-50 first learns all the examples AlexNet does, then continues to learn new examples.大网络先和小网络学到同一批样本，再继续学习更加困难的样本。这和1是很类似的。
+    - 2.After convergence,we see that ResNet-50 first learns all the examples AlexNet does, then continues to learn new examples.个人感觉根据8-a图得到的结论不是原文的结论，而是在小网络达到最高acc后，大网络同时学习只有小网络分类正确的样本和新的样本。
 
 ## Architecture
 
@@ -77,7 +82,7 @@
 - [Squeeze-and-Excitation Networks](https://arxiv.org/abs/1709.01507) (CVPR2018)
     - 3分
     - SEnet:channel-wise attention。
-    - 建模通道之间的关系，通过网络的全局损失函数自适应的重新矫正通道之间的特征相应强度。是一个c尺度的attention，通过pool(->c\*1*1)+FC+sigmoid得到attention系数。对于Resnet来说，可以加入每一个Basicblock中。
+    - 建模通道之间的关系，通过网络的全局损失函数自适应的重新矫正通道之间的特征相应强度。是一个c尺度的attention，通过global pool(->c\*1*1)+FC+sigmoid得到attention系数。对于Resnet来说，可以加入每一个Basicblock中。
 
 - [CBAM: Convolutional Block Attention Module](https://arxiv.org/abs/1807.06521) (ECCV2018)
     - 3分
