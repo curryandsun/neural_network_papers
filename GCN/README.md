@@ -66,9 +66,9 @@
     - The Laplacian smoothing computes the new features of a vertex as the weighted average of itself and its neighbors’.Since vertices in the same cluster tend to be densely connected, the smoothing makes  their features similar.于是过多次的aggregation就会导致over-smooth，即不同类的结点特征也混淆在一起了。 
 
 - [Representation Learning on Graphs with Jumping Knowledge Networks](https://arxiv.org/abs/1806.03536) (ICML2018_oral)
-    - 4分
+    - 5分
     - Motivated by observations that reveal great differences in neighborhood information ranges for graph node embeddings, we propose a new aggregation scheme for node representation learning that can adapt neigborhood ranges to nodes individually.
-    - 做法很简单，将结点1到k阶aggregation的结果做concat等操作，得到更丰富的聚合特征。
+    - JKnet uses dense skip connections to combine the node features of each layer to preserve the locality of the node representations.
 
 ## Others
 
@@ -79,15 +79,21 @@
     - 4分
     - 前者提出了两个图本身的指标:λf衡量邻居结点与自身的feature差异性(information gain);λl衡量邻居结点与自身的label差异性(information noise)。显然，一个图若有更大的λf和更小的λl，则更利于aggregation。后者也提出了非常类似的指标。
     - 基于上述两个指标前者提出了一个类似GAT的网络，两点不同比较有意思:
-        - 1.attention系数排名小于2|E|λl的全部置0，相当于认为其是与不同label结点相连的噪声信息。
+        - 1.attention系数排名小于2|E|λl的全部置0，相当于认为其是与不同label结点相连的noise信息。
         - 2.λf用来设置hidden layer的维度，显然λf越大，则需要更大的维度来保证information gain。
-    - 后者通过伪标签将不同类的边去去掉,将同类的边加上,是个非常自然的想法。
+    - 后者通过伪标签将不同类的边去去掉,将同类的边加上。是个非常自然的想法,但是复杂度过高。
 
 - [Graph Random Neural Network for Semi-Supervised Learning on Graphs](https://arxiv.org/abs/2005.11079) (NIPS2020)
     - 4分
     - 将MixMatch的做法用到GCN。
     - aug用的是直接随机将X矩阵某些行置0，也就是随机将一些结点的特征向量全部置0。
     - 将aggregation and transformation解耦:aug s次得到s个不同的X，每一个X都先做一次K阶平均的aggregation，再接一个MLP做transformation。得到输出后，s个输出分布取平均再sharpen作为伪标签。
+
+- [Simplifying Graph Convolutional Networks](https://arxiv.org/abs/1902.07153) (ICML2019)
+- [MixHop: Higher-Order Graph Convolutional Architectures via Sparsified Neighborhood Mixing](https://arxiv.org/abs/1905.00067) (ICML2019)
+    - 4分
+    - Higher-Order aggregation。
+    - 记GCN aggregation features为SXW，则前者直接用S<sup>k</sup>XW作为aggregation features;而后者类似JKnet，将S<sup>k</sup>XW<sub>k</sub>从1到k做concat,与JKnet的不同:MixHop是每次aggregation时都使用了Higher-Order的filter，而JKnet每次aggregation仍是1阶的，只是最后将每层的feature都拿出来作为最后的representation。
 
     
 

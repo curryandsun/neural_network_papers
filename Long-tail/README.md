@@ -38,7 +38,7 @@
 - [Long-Tail Learning via Logit Adjustment](https://arxiv.org/abs/2007.07314) (ICLR2021 under review)
     - 5分
     - 这篇文章的related work写的很不错，非常清晰地涵盖了最近研究长尾分布的主要论文。
-    - 文中通过对平衡后验概率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。与我们最近的一个idea非常相似，很难受。
+    - 文中通过对平衡准确率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。与我们最近的一个idea非常相似，很难受。
 
 - [Learning imbalanced datasets with label-distribution-aware margin loss](https://arxiv.org/abs/1906.07413) (NIPS2019)
     - 4分
@@ -74,6 +74,13 @@
     - [知乎原作者解析](https://zhuanlan.zhihu.com/p/112248291)
     - 以上两篇出自同一作者，本质思想类似:都是希望从特征空间层面来扩充tail类的表示。
     - 第一篇是从head类中学到一个分布再扩充到tail类；第二篇应该是受到MoCo的启发，同样存储一个特征的memory queue，但是这里的特征是带标签的，并且做了一个反频率采样，再把memory queue中的特征扩充到所有类的特征空间中，使得在特征空间中类数目比较均匀。
+
+- [Feature Space Augmentation for Long-TailedData](https://arxiv.org/abs/1912.02413) (ECCV2020)
+    - 3分
+    - motivation:如果tail类过于under-represent,再怎么reweight也不管用，于是希望想办法增强tail类feature space的表示。
+    - 认为CAM大的地方是class-specific features，小的地方是class-generic features，再将不同样本的这俩feature混合来实现feature space的aug。
+    - 想法挺有意思，但是实验完全没有选用strong baseline，估计实际效果不太行。
+
 
 ## Others
 
