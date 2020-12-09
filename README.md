@@ -21,8 +21,6 @@
 
 - [Neural Network](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Neural%20Network)
 
-- [Label Smooth](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Label%20Smooth)
-
 - [Long-tail](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Long-tail)
 
 - [Knowledge Distilling](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Knowledge%20Distilling)

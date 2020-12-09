@@ -40,6 +40,13 @@
     - 实验性的文章。发现了一个'block structure'现象:即Resnet相对于数据集过参数化后,有很多laryer输出相似的特征，即是冗余的。个人感觉这个现象是比较显然的，Resnet的跳接就是想做这样的事情。文中也没有讨论别的网络是否有这样的现象(reviewer也提到了这一点)。
     - 比较有意思的一点是，文中发现较深或者较宽的网络最终虽然有着相似的acc，但是对于对于某些类，两者的acc却差很多(好而不同?有集成的潜质)。甚至在某些类上，小型网络能比大型网络做的更好。
 
+- [On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599) (ICML2017)
+    - 5分
+    - 文中指出了虽然近年来nn的acc不断提高，但是calibration却是在降低的(如Resnet)，也就是说模型最后输出的confidence并不能真的代表置信度。
+    - 首先给出了一个利用分块思想来计算ECE的方法，可以衡量模型的calibration程度。实验表明，增加模型宽度/深度，BN层以及weight decay都会降低模型的calibration。
+    - 提出了temperature scaling方法，是在训练集上训练后，固定模型参数再通过验证集来训练后处理方法的参数。
+    - overfitting manifests in probabilistic error rather than classification error.
+
 - [Understanding deep learningrequires rethinking generalization](https://arxiv.org/abs/1611.03530) (ICLR2017_Best paper)
     - 4分
     - 实验证明了无论是输入扰动还是标签扰动，神经网络都可以百分百的拟合训练数据。那么核心问题来了，明明网络只需要暴力地去记住训练集就好，为什么实际上却有着强大的泛化能力呢?
@@ -55,7 +62,19 @@
 
 ## Tricks
 
-> 神经网络的各种tricks。
+> 神经网络的各种tricks,如mixup,label smooth等。
+
+- [When Does Label Smoothing Help](https://arxiv.org/abs/1906.02629) (NIPS2019)
+    - 5分
+    - Hinton出品，从三个方面讲label smooth的作用。
+    - 一是label smooth可以让正确类的特征tighter，且类template到其余类的距离会更加趋同。
+    - 二是从calibration的角度说明了label smooth的作用。
+    - 三是说明了虽然label smooth可以提高模型精度，但这样的模型作为知识蒸馏的teacher模型却是不好的，因为label smooth损失了类之间的相关性，而这正是知识蒸馏所需要的。
+
+- [On Mixup Training: Improved Calibration and Predictive Uncertainty for Deep Neural Networks](https://arxiv.org/abs/1905.11001) (NIPS2019)
+    - 4分
+    - mixup可以提高模型的calibration。
+    - The data augmentation provided by mixup is a form of regularization that prevents overfitting and memorization.The label smoothing resulting from mixup might be viewed as a form of entropic regularization on the training signals.即sample层面和label层面的mixup都对calibration有提高。
 
 - [Bag of Tricks for Image Classification with Convolutional Neural Networks](https://arxiv.org/abs/1812.01187) (CVPR2019)
     - 3分
@@ -64,6 +83,16 @@
 - [mixup: BEYOND EMPIRICAL RISK MINIMIZATION](https://arxiv.org/abs/1710.09412) (ICLR2018)
     - 5分
     - mixup，实质上是给模型加上了一个线性系统的先验，实验效果非常显著。在本地跑mixup时，resnet18_cifar10可以提升一个点,resnet18_cifar100可以提升三个点。
+
+- [Regularizing Neural Networks By Penalizing Confident Output Distributions](https://arxiv.org/abs/1701.06548) (ICLR2017)
+    - 3分
+    - Hinton出品。加入了负熵的正则项，惩罚低熵即high-confident的输出，因此模型将更不容易overconfident。最后说明了uniform的label smooth也是在干类似的事情。
+    - 但其实16年提出label smooth的文章里就已经提到了其与利用熵的正则化是相似的，但是没有进行实验。因此就只是干了一遍前人提出来了没干的事情?
+
+- [Rethinking the Inception Architecture for Computer Vision](https://arxiv.org/abs/1512.00567) (CVPR2016)
+    - 4分
+    - label smooth诞生地。本文提出了Inception V2,其中label smooth只是论文的一小部分，做了一些经验上地分析，ICLR2017 Hinton文章里的很多思想在其中已经有所提及。
+    - 在本地跑label smooth时，resnet18_cifar10可以提升0.4,resnet18_cifar100可以提升两个点。
 
 ## Hard And Easy
 

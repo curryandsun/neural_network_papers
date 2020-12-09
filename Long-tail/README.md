@@ -103,6 +103,13 @@
 	- 其中半监督学习框架引入了其他的unlabeled data，文中也讨论了如何选取这些unlabeled data。
 	- 利用自监督对长尾数据集预训练，再使用其他任何的长尾学习算法。
 
+- [Rethinking Class-Balanced Methods for Long-Tailed Visual Recognition from a Domain Adaptation Perspective](https://arxiv.org/abs/2003.10780) (CVPR2020)
+    - 4分
+    - 关于Domain Adaptation的分析很有意思。概括来说就是将Long-tail问题分成两个部分:
+        - 1.P<sub>s</sub>(y)≠P<sub>t</sub>(y)，这也是之前rebanlance方法一直在解决的事情。
+        - 2.P<sub>s</sub>(x|y)≠P<sub>t</sub>(x|y),即小类的under-represent问题，有很多方法通过对tail的aug来解决。
+    - 提出的方法:reweight + meta-learning。1中类级别的系数直接采用CB的系数，2中样本级别的系数则初始化为0然后通过meta-learning学得。基本上就是L2RW的思路，但仍然就是传统的reweight的方法，个人认为没办法解决2中的问题。
+
 
 
 

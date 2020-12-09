@@ -24,6 +24,7 @@
 - [GCN](#gcn)
     - [Basic](#basic)
     - [Over-smooth](#over-smooth)
+    - [Better Aggregation](#better-aggregation)
     - [Others](#others)
 
 # GCN
@@ -70,9 +71,9 @@
     - Motivated by observations that reveal great differences in neighborhood information ranges for graph node embeddings, we propose a new aggregation scheme for node representation learning that can adapt neigborhood ranges to nodes individually.
     - JKnet uses dense skip connections to combine the node features of each layer to preserve the locality of the node representations.
 
-## Others
+## Better Aggregation
 
-> 其它。
+> 探索更好的聚合方式。
 
 - [Measuring and Improving the Use of Graph Information in Graph Neural Networks](https://openreview.net/pdf/3ff628aed23920c95386567ad7acc7885d49b122.pdf) (ICLR2020)
 - [Measuring and Relieving the Over-smoothing Problem for Graph Neural Networks from the Topological View](https://arxiv.org/abs/1909.03211) (AAAI2020)
@@ -82,6 +83,15 @@
         - 1.attention系数排名小于2|E|λl的全部置0，相当于认为其是与不同label结点相连的noise信息。
         - 2.λf用来设置hidden layer的维度，显然λf越大，则需要更大的维度来保证information gain。
     - 后者通过伪标签将不同类的边去去掉,将同类的边加上。是个非常自然的想法,但是复杂度过高。
+
+- [When Do GNNs Work: Understanding and Improving Neighborhood Aggregation](https://www.ijcai.org/Proceedings/2020/181) (IJCAI2020)
+    - 4分
+    - 与上述两篇非常相似，提出了对于每个结点两个指标:一个来衡量邻居的标签差异性，一个来衡量自身与邻居的标签相似性，然后认为前者过大是harmful的，后者过小则是useless的。
+    - 做法很有意思，根据这两个指标计算出每个结点每次aggregation的权重，因此可能出现不同结点aggregation次数不一样的情况，这也是文章的motivation之一，即不同的结点显然需要不同次数的aggregation。
+
+## Others
+
+> 其它。
 
 - [Graph Random Neural Network for Semi-Supervised Learning on Graphs](https://arxiv.org/abs/2005.11079) (NIPS2020)
     - 4分
