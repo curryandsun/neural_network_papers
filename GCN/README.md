@@ -43,8 +43,8 @@
 
 - [Inductive Representation Learning on Large Graphs](https://arxiv.org/abs/1706.02216) (NIPS2017)
     - 5分
-    - transductive(GCN) -> inductive(GraphSAGE)
-    - 简而言之，GCN是学每个结点固定的表示，而GraphSAGE是学K个aggregation函数，因此对于测试中新出现的结点，只需要通过其邻居对其做aggregation即可，而不用重新训练整个网络。
+    - transductive(训练过程中val和test都是可见的:GCN) -> inductive(训练过程中val和test都是unseen的,只有train set的结点和边:GraphSAGE)
+    - 简而言之，GCN是学每个结点固定的表示，而GraphSAGE是学K个aggregation函数。因此对于测试中的新结点或新图，只需要通过其邻居对其做aggregation即可，而不用重新训练整个网络。
     - Aggregate and Combine:instead of aggregating a node and its neighbors at the same time,GraphSAGE aggregates the neighbors first and then combine the resulting neighborhood representation with the node’s representation.The COMBINE step is key to this paradigm and can be viewed as a form of a ”skip connection” between different layers.
 
 - [Graph Attention Networks](https://arxiv.org/abs/1710.10903) (ICLR2018)
@@ -89,6 +89,13 @@
     - 与上述两篇非常相似，提出了对于每个结点两个指标:一个来衡量邻居的标签差异性，一个来衡量自身与邻居的标签相似性，然后认为前者过大是harmful的，后者过小则是useless的。
     - 做法很有意思，根据这两个指标计算出每个结点每次aggregation的权重，因此可能出现不同结点aggregation次数不一样的情况，这也是文章的motivation之一，即不同的结点显然需要不同次数的aggregation。
 
+- [Simplifying Graph Convolutional Networks](https://arxiv.org/abs/1902.07153) (ICML2019)
+- [MixHop: Higher-Order Graph Convolutional Architectures via Sparsified Neighborhood Mixing](https://arxiv.org/abs/1905.00067) (ICML2019)
+    - 5, 4分
+    - Higher-Order aggregation。
+    - 前者假设GCN中的非线性层(ReLU)意义不大，因此直接用S<sup>k</sup>X作为aggregation features。文中指出k>1时,S<sup>k</sup> act as a low-pass-type filters。notice:SGC would fail when the feature input is nonlinearly-separable because the graph convolution part does not contribute to non-linear manifold learning.这也解释了为什么在random split的情况下，SGC无法收敛。
+    - 而后者类似JKnet，将S<sup>k</sup>XW<sub>k</sub>从1到k做concat,与JKnet的不同:MixHop是每次aggregation时都使用了Higher-Order的filter，而JKnet每次aggregation仍是1阶的，只是最后将每层的feature都拿出来作为最后的representation。
+
 ## Others
 
 > 其它。
@@ -99,11 +106,18 @@
     - aug用的是直接随机将X矩阵某些行置0，也就是随机将一些结点的特征向量全部置0。
     - 将aggregation and transformation解耦:aug s次得到s个不同的X，每一个X都先做一次K阶平均的aggregation，再接一个MLP做transformation。得到输出后，s个输出分布取平均再sharpen作为伪标签。
 
-- [Simplifying Graph Convolutional Networks](https://arxiv.org/abs/1902.07153) (ICML2019)
-- [MixHop: Higher-Order Graph Convolutional Architectures via Sparsified Neighborhood Mixing](https://arxiv.org/abs/1905.00067) (ICML2019)
-    - 4分
-    - Higher-Order aggregation。
-    - 记GCN aggregation features为SXW，则前者直接用S<sup>k</sup>XW作为aggregation features;而后者类似JKnet，将S<sup>k</sup>XW<sub>k</sub>从1到k做concat,与JKnet的不同:MixHop是每次aggregation时都使用了Higher-Order的filter，而JKnet每次aggregation仍是1阶的，只是最后将每层的feature都拿出来作为最后的representation。
+- [Revisiting Graph Neural Networks:All We Have is Low-Pass Filters](https://arxiv.org/abs/1905.09550) (CoRR2019)
+- [PairNorm: Tackling Oversmoothing in GNNs](https://arxiv.org/abs/1909.12223) (ICLR2020)
+- [Revisiting Graph Convolutional Network on Semi-Supervised Node Classification from an Optimization Perspective](https://arxiv.org/abs/2009.11469) (arXiv2020)
+    - 4分。
+    - 三篇文章都包含一个相同的优化问题:graph-regularized least squares (GRLS)，从这个角度可以得到GCN是其闭式解的一阶近似。
+    - 第一篇对于SGC中的loss-pass filter有更详细的解释。后两篇都考虑了不相邻结点的正则化。
+
+
+
+
+
+
 
     
 
