@@ -24,7 +24,7 @@
 - [Long-tail](#long-tail)
     - [Reweight](#reweight)
     - [Decoupling](#decoupling)
-    - [Feature Augmentation](#feature-augmentation)
+    - [Tail Augmentation](#tail-augmentation)
     - [Others](#others)
 
 # Long-tail
@@ -62,11 +62,11 @@
 - [BBN: Bilateral-Branch Network with Cumulative Learningfor Long-Tailed Visual Recognition](https://arxiv.org/abs/1912.02413) (CVPR2020_oral)
     - 4分
     - 提出了BBN网络结构来解决Long-tail问题，本质思想与Decoupling类似，希望特征学习阶段是不平衡的而分类器学习阶段是平衡的。
-	- 实验效果非常优秀，但是实际上在对比之前的方法时并不算公平，因为网络多了近乎一倍的参数量，且每个batch采样也是两倍。
+	- 实验效果非常优秀，但是实际上在对比之前的方法时并不算公平，因为网络参数量更大，且每个batch采样也是两倍。
 
-## Feature Augmentation
+## Tail Augmentation
 
-> 在特征空间上对小类进行增广。
+> 对小类进行增广。这类方法通常想法新奇，但实现较为复杂。
 
 - [Deep Representation Learning on Long-tailed Data: A Learnable EmbeddingAugmentation Perspective](https://arxiv.org/abs/2002.10826) (CVPR2020)
 - [Memory-based Jitter: Improving Visual Recognition on Long-tailed Data with Diversity In Memory](https://arxiv.org/abs/2008.09809) (arXiv2020)
@@ -75,7 +75,13 @@
     - 以上两篇出自同一作者，本质思想类似:都是希望从特征空间层面来扩充tail类的表示。
     - 第一篇是从head类中学到一个分布再扩充到tail类；第二篇应该是受到MoCo的启发，同样存储一个特征的memory queue，但是这里的特征是带标签的，并且做了一个反频率采样，再把memory queue中的特征扩充到所有类的特征空间中，使得在特征空间中类数目比较均匀。
 
-- [Feature Space Augmentation for Long-TailedData](https://arxiv.org/abs/1912.02413) (ECCV2020)
+- [M2m: Imbalanced Classification via Major-to-minor Translation](https://arxiv.org/abs/2004.00431) (CVPR2020)
+    - 4分
+    - motivation:另类的over-sampling，将head类的样本转化为tail类的样本来构建一个平衡数据集。
+    - x<sup>∗</sup> = argmin<sub>x=x<sub>0</sub>+δ</sub>L(g;x,k) +λ·f<sub>k<sub>0</sub></sub>(x)
+    - 全文的核心就是上述公式。其中x是tail(k)类中的样本，x<sub>0</sub>是head(k<sub>0</sub>)类中的样本，g是在原始D中训练得到的分类器，f是最终的分类器。该优化目标就是希望x<sup>∗</sup>被g认为是tail类的，且f认为其不是head类的。通过梯度下降求解该式即可将x<sub>0</sub>转化为x<sup>∗</sup>。
+
+- [Feature Space Augmentation for Long-Tailed Data](https://arxiv.org/abs/1912.02413) (ECCV2020)
     - 3分
     - motivation:如果tail类过于under-represent,再怎么reweight也不管用，于是希望想办法增强tail类feature space的表示。
     - 认为CAM大的地方是class-specific features，小的地方是class-generic features，再将不同样本的这俩feature混合来实现feature space的aug。
@@ -89,7 +95,7 @@
 - [Long-tailed Recognition by Routing Diverse Distribution-Aware Experts](https://arxiv.org/abs/2010.01809) (ICLR2021 under review)
     - 4分
     - 集成学习的思想。stage1学experts的参数，两个Loss要求多个experts好而不同(每个experts可以关注不同的类)。stage2学对每个instance具体的experts的选择方法。
-    - 为了降低模型复杂度：网络中所有channel变为四分之一，网络前一部分参数共享，stage2专家分配。
+    - 为了降低模型复杂度：网络中所有channel变为四分之一(代码更新后发现这里其实是减少到四分之三，原论文有非常大的误导性)，网络前一部分参数共享，stage2专家分配。
     - 实验效果好到离谱，同时提升head类和tail类，且各大任务都能提升6%左右。
 
 - [Learning From Multiple Experts: Self-paced Knowledge Distillation for Long-tailed Classification](https://arxiv.org/abs/2001.01536) (ECCV2020_spotlight)

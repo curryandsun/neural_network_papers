@@ -80,6 +80,11 @@
     - 3分
     - 记录了应用nn进行图像分类的各种tricks，第五章介绍的mixup,label smooth,知识蒸馏等都是非常有用的技巧。
 
+- [How Does Batch Normalization Help Optimization?](https://arxiv.org/abs/1805.11604) (NIPS2018)
+    - 5分
+    - 1.BN并不一定与ICS(internal covariate shift)有直接联系。
+    - 2.BN真正的作用在于使得loss landscape更加平滑:it reparametrizes the underlying optimization problem to make its landscape significantly more smooth.
+
 - [mixup: BEYOND EMPIRICAL RISK MINIMIZATION](https://arxiv.org/abs/1710.09412) (ICLR2018)
     - 5分
     - mixup，实质上是给模型加上了一个线性系统的先验，实验效果非常显著。在本地跑mixup时，resnet18_cifar10可以提升一个点,resnet18_cifar100可以提升三个点。
