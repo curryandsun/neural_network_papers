@@ -27,6 +27,13 @@
 
 > 无监督学习(包括自监督学习,对比学习)。
 
+- [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/abs/2006.07733) (NIPS2020)
+- [Exploring Simple Siamese Representation Learning](https://arxiv.org/abs/2011.10566) (arXivS2020)
+- [ISD: Self-Supervised Learning by Iterative Similarity Distillation](https://arxiv.org/abs/2012.09259) (arXiv2020)
+    - 4分。
+    - 较新的一些对比学习方法，似乎在说明负样本也并不一定重要，但也并没有一个很好的解释。
+    - 前两者都只用了正正样本对，后者只用了正负样本对，都与contrastive loss在形式上有所区别。
+
 - [Momentum Contrast for Unsupervised Visual Representation Learning](https://arxiv.org/abs/1911.05722) (CVPR2020_oral)
     - 5分
     - KaiMing He出品。指出之前的办法要么不够large，要么不够consistent。算法主要包括以下几点:
@@ -35,7 +42,7 @@
         - shuffle batch normalization:multi-GPU的设置下，对每一个mini-batch，shuffle f_k的samples order，而f_q的保持不变，这样就保证了每个GPU上的两个encoder的subset是不同的。
 
 - [A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/abs/2002.05709) (ICML2020)
-    - 4分
+    - 5分
     - Hinton出品。算法主要包括以下几点:
         - Simple体现在抛弃了memory bank等各种人工设计的模块，采用了最基本最简洁的contrastive learning框架。可以这么simple的前提在于要加大batchsize来提高负样本的采样数目，文中使用了恐怖的8096。
         - 探究了data augmentation的重要性。
