@@ -35,7 +35,7 @@
 
 > Reweight loss,通常是在大类和小类间做一个trade-off。
 
-- [Long-Tail Learning via Logit Adjustment](https://arxiv.org/abs/2007.07314) (ICLR2021 under review)
+- [Long-Tail Learning via Logit Adjustment](https://arxiv.org/abs/2007.07314) (ICLR2021_spotlight)
     - 5分
     - 这篇文章的related work写的很不错，非常清晰地涵盖了最近研究长尾分布的主要论文。
     - 文中通过对平衡准确率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。与我们最近的一个idea非常相似，很难受。
@@ -92,7 +92,7 @@
 
 > 包括group和ensemble的方法。
 
-- [Long-tailed Recognition by Routing Diverse Distribution-Aware Experts](https://arxiv.org/abs/2010.01809) (ICLR2021 under review)
+- [Long-tailed Recognition by Routing Diverse Distribution-Aware Experts](https://arxiv.org/abs/2010.01809) (ICLR2021_spotlight)
     - 4分
     - 集成学习的思想。stage1学experts的参数，两个Loss要求多个experts好而不同(每个experts可以关注不同的类)。stage2学对每个instance具体的experts的选择方法。
     - 为了降低模型复杂度：网络中所有channel变为四分之一(代码更新后发现这里其实是减少到四分之三，原论文有非常大的误导性)，网络前一部分参数共享，stage2专家分配。
