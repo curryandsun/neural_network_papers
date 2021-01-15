@@ -19,18 +19,20 @@
 
 # Table of contents
 
-- [Neural Network](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Neural%20Network)
+- [Long-tail](https://github.com/curryandsun/neural_network_papers/tree/main/Long-tail)
 
-- [Long-tail](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Long-tail)
+- [Neural Network](https://github.com/curryandsun/neural_network_papers/tree/main/Neural%20Network)
 
-- [Knowledge Distilling](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Knowledge%20Distilling)
+- [Knowledge Distilling](https://github.com/curryandsun/neural_network_papers/tree/main/Knowledge%20Distilling)
 
-- [Unsupervised](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Unsupervised)
+- [GCN](https://github.com/curryandsun/neural_network_papers/tree/main/GCN)
 
-- [Semi-supervised](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Semi-supervised)
+- [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
 
-- [Fine-grained](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Fine-grained)
+- [Unsupervised](https://github.com/curryandsun/neural_network_papers/tree/main/Unsupervised)
 
-- [Noisy label](https://github.com/SunYiXuan98/neural_network_papers/tree/main/Noisy%20label)
+- [Fine-grained](https://github.com/curryandsun/neural_network_papers/tree/main/Fine-grained)
 
-- [GCN](https://github.com/SunYiXuan98/neural_network_papers/tree/main/GCN)
+- [Noisy label](https://github.com/curryandsun/neural_network_papers/tree/main/Noisy%20label)
+
+- [OOD Detection](https://github.com/curryandsun/neural_network_papers/tree/main/OOD%20Detection)
