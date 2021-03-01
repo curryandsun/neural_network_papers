@@ -22,6 +22,9 @@
 - [论文阅读笔记](#论文阅读笔记)
 - [Table of Contents](#table-of-contents)
 - [OoD Detection](#OoD-detection)
+- [Adversarial](#adversarial)
+- [Noisy label](#noisy-label)
+
 
 # OoD Detection
 
@@ -56,3 +59,23 @@
     - OoD检测需要既保证in-distribution的分类准确率，又保证out-of-distribution的检测率。而后者是一个不平衡二分类问题，需要用ROC，PR等指标衡量。
     - OoD检测最直接的思路就是取softmax后最大的概率值作为判断标准，小于阈值则认为是OoD。文中用该方法建立了一系列baseline。
     - 观察发现OoD样本通常也有较大的confidence，因此这样的方法势必有局限性。
+
+# Adversarial
+
+> Adversarial attack and defense
+
+- [Adversarial Examples Improve Image Recognition](https://arxiv.org/abs/1911.09665) (CVPR2020)
+    - 4分
+    - motivation:之前的adversarial training在大数据集上虽然可以提高鲁棒性，但都会降低在clean data上的准确率，因此作者希望通过adversarial样本来提高clean data准确率。
+    - 文中认为之前adversarial training的问题出在distribution  mismatch，即对抗样本和真实样本的分布是不一致的。因此可以多加一个辅助的BN，使得二者通过不同的BN以免混淆分布。
+
+# Noisy Label
+
+> 标签噪声。
+
+- [Early-Learning Regularization Prevents Memorization of Noisy Labels](https://arxiv.org/abs/2007.00151) (NIPS2020)
+    - 5分
+    - motivation:DNN在noisy label的学习过程中有’early learning‘的现象:first use patterns, not brute force memorization, to fit real data，then memorize noisy label。因此，将早期模型的输出作为后期的一个正则化，有点像self-KD。
+    - 在KD中，拟合target用的是KL散度，但文中用的是内积。原因是KL散度相比内积对target的拟合程度更高，是想利用到dark knowledge，对本文来说会过拟合。
+    - 从梯度的角度说明了两点: (1) ensure that the contribution to the gradient from examples with clean labels remains large, and (2) neutralize the influence of the examples with wrong labels on the gradient.
+    - 文章的图画的是真好，看图就非常容易明白作者的idea。

@@ -25,6 +25,8 @@
 
 - [Knowledge Distilling](https://github.com/curryandsun/neural_network_papers/tree/main/Knowledge%20Distilling)
 
+- [Robustness](https://github.com/curryandsun/neural_network_papers/tree/main/Robustness)
+
 - [GCN](https://github.com/curryandsun/neural_network_papers/tree/main/GCN)
 
 - [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
@@ -32,7 +34,3 @@
 - [Unsupervised](https://github.com/curryandsun/neural_network_papers/tree/main/Unsupervised)
 
 - [Fine-grained](https://github.com/curryandsun/neural_network_papers/tree/main/Fine-grained)
-
-- [Noisy label](https://github.com/curryandsun/neural_network_papers/tree/main/Noisy%20label)
-
-- [OOD Detection](https://github.com/curryandsun/neural_network_papers/tree/main/OOD%20Detection)
