@@ -21,25 +21,44 @@
 
 - [论文阅读笔记](#论文阅读笔记)
 - [Table of Contents](#table-of-contents)
-- [OoD Detection](#OoD-detection)
+- [OOD Detection](#OOD-detection)
 - [Adversarial](#adversarial)
 - [Noisy label](#noisy-label)
 
 
-# OoD Detection
+# OOD Detection
+> 一些类似概念的区分:
 
-> out-of-distribution detection,类似的概念有open-set recognition,novelty detection,anomaly detection等。
+> Out-of-distribution (OOD) detection:it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
+
+> Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).
+
+> Anomaly detection:This direction is more focused on single class anomaly detection, where we consider one class of a dataset as in-distribution and the rest of the classes as a source of outliers.
+
+
+- [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR 2021)
+    - 4分
+    - contrastive self-supervised学表示，再聚类。test时算马氏距离做OOD Detection。idea并没有什么novelty，与NIPS18的Mahalanobis方法很相似，只不过因为没有label信息，因此需要自监督+聚类来确定簇中心和协方差矩阵。
+    - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
+    - related work很清晰。
 
 - [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR 2020)
     - 4分
-    - motivation:在train以及valid过程中，应该保持OoD dataset是unseen状态。
-    - 在之前的包括baseline，ODIN等方法中，其超参其实是对着测试集的OoD dataset调的，而这显然不符合现实setting，也无法迁移到别的OoD dataset之上。
-    - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OoD dataset中调得。文中大篇幅的概率方面的解释无法令我认同。
+    - motivation:在train以及valid过程中，应该保持OOD dataset是unseen状态。
+    - 在之前的包括baseline，ODIN等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然不符合现实setting，也无法迁移到别的OOD dataset之上。
+    - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释无法令我认同。
 
 - [Deep Anomaly Detection with Outlier Exposure](https://arxiv.org/abs/1812.04606) (ICLR 2019)
     - 4分
-    - motivation:用OoD dataset对训练好的nn做finetune(如使得OoD data的输出分布更接近均匀分布),期望其泛化到test时的OoD data中。
-    - 如Baseline以及ODIN方法其实都没有涉及到对原有网络的重新训练，因此无需考虑in-distribution data的分类准确率。而OE方法其实是在其他方法的基础上再对网络进行finetune，是会影响分类准确率的，但文中只讨论了detection这一方面。
+    - motivation:用OOD dataset对训练好的nn做finetune(如使得OOD data的输出分布更接近均匀分布),期望其泛化到test时的OOD data中。也就是说该方法needs access to some OOD datasets。
+
+- [A Simple Unified Framework for Detecting Out-of-Distribution Samples and Adversarial Attacks](https://arxiv.org/abs/1807.03888) (NIPS2018)
+    - 5分
+    - supervised学表示，再把每个类的features看作是高斯分布，test时计算马式距离。
+    - why Mahalanobis distance? 
+        - 1.abnormal samples can be characterized better in the representation space of DNNs, rather than the “label-overfitted” output space of softmax-based posterior distribution used in the prior works for detecting them. 
+        - 2.马氏距离相比于欧氏距离考虑到各种属性之间的联系，即消除了一些属性相关性，更重要的是实验效果都比欧氏距离好。
+    - 两个trick:1.与ODIN类似的input preprocessing。2.将浅层features也考虑进来。
 
 - [Learning Confidence for Out-of-Distribution Detection in Neural Networks](https://arxiv.org/abs/1802.04865) (arXiv2018)
     - 3分
@@ -51,14 +70,14 @@
     - 5分
     - 1.On in-distribution images, modern neural networks tend to produce outputs with larger variance across class labels.
     - 2.neural networks have larger norm of gradient of log-softmax scores when applied on in-distribution images.
-    - 根据上述两个观察，提出了用temperature scaling和类似FGSM的input preprocessing来进一步拉大ID和OoD样本输出概率分布的差别，再用max-softmax方法来判定。该方法记为ODIN。
-    - 文中的OoD指标相比于baseline更加清晰。
+    - 根据上述两个观察，提出了用temperature scaling和类似FGSM的input preprocessing来进一步拉大ID和OOD样本输出概率分布的差别，再用max-softmax方法来判定。该方法记为ODIN。
+    - 文中的OOD指标相比于baseline更加清晰。
 
 - [A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks](https://arxiv.org/abs/1610.02136) (ICLR2017)
     - 4分
-    - OoD检测需要既保证in-distribution的分类准确率，又保证out-of-distribution的检测率。而后者是一个不平衡二分类问题，需要用ROC，PR等指标衡量。
-    - OoD检测最直接的思路就是取softmax后最大的概率值作为判断标准，小于阈值则认为是OoD。文中用该方法建立了一系列baseline。
-    - 观察发现OoD样本通常也有较大的confidence，因此这样的方法势必有局限性。
+    - OOD检测需要既保证in-distribution的分类准确率，又保证out-of-distribution的检测率。而后者是一个不平衡二分类问题，需要用ROC，PR等指标衡量。
+    - OOD检测最直接的思路就是取softmax后最大的概率值作为判断标准，小于阈值则认为是OOD。文中用该方法建立了一系列baseline。
+    - 观察发现OOD样本通常也有较大的confidence，因此这样的方法势必有局限性。
 
 # Adversarial
 
