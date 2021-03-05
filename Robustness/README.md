@@ -31,10 +31,9 @@
 
 > Out-of-distribution (OOD) detection:it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
 
-> Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).
+> Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).The classifier should do well in both classfication and detection.
 
 > Anomaly detection:This direction is more focused on single class anomaly detection, where we consider one class of a dataset as in-distribution and the rest of the classes as a source of outliers.
-
 
 - [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR 2021)
     - 4分
@@ -42,11 +41,20 @@
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
     - related work很清晰。
 
+- [CSI: Novelty Detection via Contrastive Learningon Distributionally Shifted Instances](https://arxiv.org/abs/2007.08176) (NIPS 2020)
+    - 3分
+    - contrastive学表示再打分的大框架。
+    - 有意思的一个点是:In particular, we verify that the “hard” augmentations, thought to be harmful for contrastive representation learning, can be helpful for OOD detection.也就是将“hard” augmentations后的样本作为neg项加入contrastive loss的计算，这样学到的表示对classify没有提升，但对OOD有帮助。
+
+- [Contrastive Training for Improved Out-of-Distribution Detection](https://arxiv.org/abs/2007.05566) (arXiv 2020)
+    - 3分
+    - contrastive学表示，test时计算与每个类的马氏距离。也就是说前面是无监督的，后面却需要label，这点很奇怪，[SSD](https://openreview.net/forum?id=v5gjXpmR8J)方法加了一步聚类显得自然很多。
+
 - [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR 2020)
     - 4分
     - motivation:在train以及valid过程中，应该保持OOD dataset是unseen状态。
     - 在之前的包括baseline，ODIN等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然不符合现实setting，也无法迁移到别的OOD dataset之上。
-    - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释无法令我认同。
+    - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释偏于讲故事。
 
 - [Deep Anomaly Detection with Outlier Exposure](https://arxiv.org/abs/1812.04606) (ICLR 2019)
     - 4分
@@ -75,7 +83,7 @@
 
 - [A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks](https://arxiv.org/abs/1610.02136) (ICLR2017)
     - 4分
-    - OOD检测需要既保证in-distribution的分类准确率，又保证out-of-distribution的检测率。而后者是一个不平衡二分类问题，需要用ROC，PR等指标衡量。
+    - out-of-distribution的检测是一个不平衡二分类问题，需要用ROC，PR等指标衡量。
     - OOD检测最直接的思路就是取softmax后最大的概率值作为判断标准，小于阈值则认为是OOD。文中用该方法建立了一系列baseline。
     - 观察发现OOD样本通常也有较大的confidence，因此这样的方法势必有局限性。
 
