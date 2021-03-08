@@ -33,10 +33,8 @@
 
 > Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).The classifier should do well in both classfication and detection.
 
-> Anomaly detection:This direction is more focused on single class anomaly detection, where we consider one class of a dataset as in-distribution and the rest of the classes as a source of outliers.
-
 - [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR 2021)
-    - 4分
+    - 3分
     - contrastive self-supervised学表示，再聚类。test时算马氏距离做OOD Detection。idea并没有什么novelty，与NIPS18的Mahalanobis方法很相似，只不过因为没有label信息，因此需要自监督+聚类来确定簇中心和协方差矩阵。
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
     - related work很清晰。
@@ -55,6 +53,11 @@
     - motivation:在train以及valid过程中，应该保持OOD dataset是unseen状态。
     - 在之前的包括baseline，ODIN等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然不符合现实setting，也无法迁移到别的OOD dataset之上。
     - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释偏于讲故事。
+
+- [Unsupervised Out-of-Distribution Detection by Maximum Classifier Discrepancy](https://arxiv.org/abs/1908.04951) (ICCV 2019)
+    - 4分
+    - 很有意思的idea:OOD样本更集中于boundary附近，那么用两个不同的classifier，OOD样本显然会比ID样本有更大output difference，那么就可以用这一点来做OOD detection。
+    - 需要用到unlabel的ID和OOD的混合dataset来做finetune，用来进一步Maximum Classifier Discrepancy，这点和[OE](https://arxiv.org/abs/1812.04606)方法很类似。
 
 - [Deep Anomaly Detection with Outlier Exposure](https://arxiv.org/abs/1812.04606) (ICLR 2019)
     - 4分
@@ -95,6 +98,14 @@
     - 4分
     - motivation:之前的adversarial training在大数据集上虽然可以提高鲁棒性，但都会降低在clean data上的准确率，因此作者希望通过adversarial样本来提高clean data准确率。
     - 文中认为之前adversarial training的问题出在distribution  mismatch，即对抗样本和真实样本的分布是不一致的。因此可以多加一个辅助的BN，使得二者通过不同的BN以免混淆分布。
+
+- [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572) (ICLR2015)
+    - 4分
+    - 经典的FGSM方法。
+    - 从线性模型出发，一个原始样本perturbation η如果满足无穷范数小于其图像分辨率，那么分类器理应无法分出区别。但是经过W^T*η之后，却会因为高维度而将perturbation放大而导致误分。
+    - 最终的FGSM方法中，求梯度就是linearize the cost function around the current value of θ，取sign是为了obtaining an optimal max-norm constrained pertubation。
+
+
 
 # Noisy Label
 
