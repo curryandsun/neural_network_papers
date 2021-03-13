@@ -22,16 +22,13 @@
 - [论文阅读笔记](#论文阅读笔记)
 - [Table of Contents](#table-of-contents)
 - [OOD Detection](#OOD-detection)
+- [Open-set Recognition](#Open-set-Recognition)
 - [Adversarial](#adversarial)
-- [Noisy label](#noisy-label)
+- [Noisy Label](#noisy-label)
 
 
 # OOD Detection
-> 一些类似概念的区分:
-
-> Out-of-distribution (OOD) detection:it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
-
-> Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).The classifier should do well in both classfication and detection.
+> Out-of-distribution (OOD) Detection:it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
 
 - [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR 2021)
     - 3分
@@ -89,6 +86,17 @@
     - out-of-distribution的检测是一个不平衡二分类问题，需要用ROC，PR等指标衡量。
     - OOD检测最直接的思路就是取softmax后最大的概率值作为判断标准，小于阈值则认为是OOD。文中用该方法建立了一系列baseline。
     - 观察发现OOD样本通常也有较大的confidence，因此这样的方法势必有局限性。
+
+# Open-Set Recognition
+
+> Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).The classifier should do well in both classfication and detection.
+
+- [Learning Open Set Network with Discriminative Reciprocal Points](https://arxiv.org/abs/2011.00178) (ECCV2020_spotlight)
+    - 4分
+    - motivation:一般nn后面接的线性层每个类都有一个模板向量来代表类的表示。而这篇文章则反之，用Reciprocal Points来代表不属于此类的表示。不属于某类的包括other classes和unknown classes，那么这种方法相比于常规做法就能对unknown classes做更好的建模。
+    - loss中的两项正好表示两个目标:
+        - 1.分类：距离类Reciprocal Points最远才表示属于此类。
+        - 2.保证Reciprocal Points是非此类的表示：类内样本到Reciprocal Points的距离要足够远。
 
 # Adversarial
 
