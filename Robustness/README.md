@@ -28,16 +28,22 @@
 
 
 # OOD Detection
-> Out-of-distribution (OOD) Detection:it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
+> Out-of-distribution (OOD) Detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
+
+
+- [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv 2021)
+    - 3分
+    - motivation:use corrupted images as the intermediate of ID and OOD.
+    - 对每种transformation定义一个soft label，而这个soft label对应于这种transformation后的在原ID网络中的acc，也就是说acc越低认为corrupt更严重，则更偏向于OOD。
 
 - [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR 2021)
-    - 3分
+    - 4分
     - contrastive self-supervised学表示，再聚类。test时算马氏距离做OOD Detection。idea并没有什么novelty，与NIPS18的Mahalanobis方法很相似，只不过因为没有label信息，因此需要自监督+聚类来确定簇中心和协方差矩阵。
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
     - related work很清晰。
 
 - [CSI: Novelty Detection via Contrastive Learningon Distributionally Shifted Instances](https://arxiv.org/abs/2007.08176) (NIPS 2020)
-    - 3分
+    - 4分
     - contrastive学表示再打分的大框架。
     - 有意思的一个点是:In particular, we verify that the “hard” augmentations, thought to be harmful for contrastive representation learning, can be helpful for OOD detection.也就是将“hard” augmentations后的样本作为neg项加入contrastive loss的计算，这样学到的表示对classify没有提升，但对OOD有帮助。
 
@@ -46,7 +52,7 @@
     - contrastive学表示，test时计算与每个类的马氏距离。也就是说前面是无监督的，后面却需要label，这点很奇怪，[SSD](https://openreview.net/forum?id=v5gjXpmR8J)方法加了一步聚类显得自然很多。
 
 - [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR 2020)
-    - 4分
+    - 3分
     - motivation:在train以及valid过程中，应该保持OOD dataset是unseen状态。
     - 在之前的包括baseline，ODIN等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然不符合现实setting，也无法迁移到别的OOD dataset之上。
     - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释偏于讲故事。
@@ -74,6 +80,10 @@
     - 文中很多方法(如加一个c相关的Loss,限制c的penalty数目)最终目的仍然是为了输出的c更接近真实的置信度。
     - 方法非常直观，但效果存疑。
 
+- [Training Confidence-calibrated Classifiers for Detecting Out-of-Distribution Samples](https://arxiv.org/abs/1711.09325) (ICLR2018)
+    - 4分
+    - 利用GAN来生成靠近boundary的样本当作OOD样本，约束网络在OOD样本上输出均匀分布。和[OE](https://arxiv.org/abs/1812.04606)方法很类似，只不过这里用GAN来生成而不是直接利用OOD dataset。
+
 - [Enhancing The Reliability of Out-of-distribution Image Detection in Neural Networks](https://arxiv.org/abs/1706.02690) (ICLR2018)
     - 5分
     - 1.On in-distribution images, modern neural networks tend to produce outputs with larger variance across class labels.
@@ -89,7 +99,11 @@
 
 # Open-Set Recognition
 
-> Open-Set Recognition(OSR):some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain).The classifier should do well in both classfication and detection.
+> Open-Set Recognition(OSR): some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain). The classifier should do well in both classfication and detection.
+
+- [Generative-Discriminative Feature Representations for Open-Set Recognition](https://openaccess.thecvf.com/content_CVPR_2020/html/Perera_Generative-Discriminative_Feature_Representations_for_Open-Set_Recognition_CVPR_2020_paper.html) (CVPR2020)
+    - 3分
+    - motivation:auto-encoder + rotation loss来提高instance-wise的表示。
 
 - [Learning Open Set Network with Discriminative Reciprocal Points](https://arxiv.org/abs/2011.00178) (ECCV2020_spotlight)
     - 4分
@@ -97,6 +111,16 @@
     - loss中的两项正好表示两个目标:
         - 1.分类：距离类Reciprocal Points最远才表示属于此类。
         - 2.保证Reciprocal Points是非此类的表示：类内样本到Reciprocal Points的距离要足够远。
+
+- [Classification-Reconstruction Learning for Open-Set Recognition](https://arxiv.org/abs/1812.04246) (CVPR2019)
+    - 3分
+    - motivation:认为openmax方法中利用logits来表征某个样本其实是不利于unknown detection的(class-wise)。
+    - 因此用类似ladder nets的网络结构 + reconstruction loss来计算另一个中间表示z(instance-wise,可以用self-supervised?)，结合logits与z再用openmax。
+
+- [Towards Open Set Deep Networks](https://arxiv.org/abs/1511.06233) (CVPR2016)
+    - 5分
+    - 将softmax改造成多出一个unknown类的openmax。
+    - Assume that d of the inliers follows a  Weibull distribution：首先用每个类trainning data的logits(av)到类中心的距离去fit c个Weibull分布，测试时计算样本logits属于每个类对应分布的class-belongingness,再据此调整最后的输出概率分布。
 
 # Adversarial
 
