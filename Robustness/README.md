@@ -42,6 +42,15 @@
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
     - related work很清晰。
 
+- [Unsupervised Anomaly Detection From Semantic Similarity Scores](https://arxiv.org/abs/2012.00461) (ICLR 2021 reject)
+    - 4分
+    - movitation:contrastive learning学到的表示有[Alignment and Uniformity](https://arxiv.org/abs/2005.10242)的特点。In this representation, feature vectors from the in-distribution are semantically similar if they approximately align and semantically diverse if they are separated by a large angle. If OOD examples  are mapped onto the unit-hypersphere, they can align with training examples without being semantically similar.
+
+- [Detecting Out-of-Distribution Examples with Gram Matrices](http://proceedings.mlr.press/v119/sastry20a.html) (ICML 2020)
+    - 4分
+    - 所谓的Gram Matrices其实就是一个样本activation map(c*h*w)中channel-wise correlations(c*c),那么其实这个就可以表征训练集的一些特征，测试样本若与其bia较大则可以认为是OOD。
+    - 这其实和KD里面用feature来蒸馏的做法很类似，能不能把KD那套搬到OOD里面来用?
+
 - [CSI: Novelty Detection via Contrastive Learningon Distributionally Shifted Instances](https://arxiv.org/abs/2007.08176) (NIPS 2020)
     - 4分
     - contrastive学表示再打分的大框架。
@@ -49,7 +58,7 @@
 
 - [Contrastive Training for Improved Out-of-Distribution Detection](https://arxiv.org/abs/2007.05566) (arXiv 2020)
     - 3分
-    - contrastive学表示，test时计算与每个类的马氏距离。也就是说前面是无监督的，后面却需要label，这点很奇怪，[SSD](https://openreview.net/forum?id=v5gjXpmR8J)方法加了一步聚类显得自然很多。
+    - supervised + contrastive学表示，test时计算与每个类的马氏距离。也就是利用contrastive生成更general的features,想法类似于[Generative-Discriminative Feature Representations for Open-Set Recognition](https://openaccess.thecvf.com/content_CVPR_2020/html/Perera_Generative-Discriminative_Feature_Representations_for_Open-Set_Recognition_CVPR_2020_paper.html)。
 
 - [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR 2020)
     - 3分
