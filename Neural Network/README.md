@@ -114,8 +114,13 @@
 
 > 神经网络的结构。
 
+- [Non-local Neural Networks](https://arxiv.org/abs/1711.07971) (CVPR2018)
+    - 5分
+    - spatial-wise attention。
+    - 注意这里的attention map是hw*hw尺度的，建模的是spatial-wise两两之间的联系，而不是h*w这样建模的是每个点的重要性。
+
 - [Squeeze-and-Excitation Networks](https://arxiv.org/abs/1709.01507) (CVPR2018)
-    - 3分
+    - 5分
     - SEnet:channel-wise attention。
     - 建模通道之间的关系，通过网络的全局损失函数自适应的重新矫正通道之间的特征相应强度。是一个c尺度的attention，通过global pool(->c\*1*1)+FC+sigmoid得到attention系数。对于Resnet来说，可以加入每一个Basicblock中。
 
