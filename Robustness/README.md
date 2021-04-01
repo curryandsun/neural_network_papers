@@ -40,11 +40,11 @@
     - 4分
     - contrastive self-supervised学表示，再聚类。test时算马氏距离做OOD Detection。idea并没有什么novelty，与NIPS18的Mahalanobis方法很相似，只不过因为没有label信息，因此需要自监督+聚类来确定簇中心和协方差矩阵。
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
-    - related work很清晰。
 
 - [Unsupervised Anomaly Detection From Semantic Similarity Scores](https://arxiv.org/abs/2012.00461) (ICLR 2021 reject)
-    - 4分
+    - 3分
     - movitation:contrastive learning学到的表示有[Alignment and Uniformity](https://arxiv.org/abs/2005.10242)的特点。In this representation, feature vectors from the in-distribution are semantically similar if they approximately align and semantically diverse if they are separated by a large angle. If OOD examples  are mapped onto the unit-hypersphere, they can align with training examples without being semantically similar.
+    - 实验三个100让人震惊，但尴尬的是作者更新在arXiv上发现实验做错了...
 
 - [Detecting Out-of-Distribution Examples with Gram Matrices](http://proceedings.mlr.press/v119/sastry20a.html) (ICML 2020)
     - 4分
@@ -61,10 +61,11 @@
     - supervised + contrastive学表示，test时计算与每个类的马氏距离。也就是利用contrastive生成更general的features,想法类似于[Generative-Discriminative Feature Representations for Open-Set Recognition](https://openaccess.thecvf.com/content_CVPR_2020/html/Perera_Generative-Discriminative_Feature_Representations_for_Open-Set_Recognition_CVPR_2020_paper.html)。
 
 - [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR 2020)
-    - 3分
+    - 4分
     - motivation:在train以及valid过程中，应该保持OOD dataset是unseen状态。
-    - 在之前的包括baseline，ODIN等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然不符合现实setting，也无法迁移到别的OOD dataset之上。
+    - 在之前的包括ODIN,Maha等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然是错误且在现实应用中无法接受的。
     - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释偏于讲故事。
+    - 在DomainNet上做的实验非常有意思。
 
 - [Unsupervised Out-of-Distribution Detection by Maximum Classifier Discrepancy](https://arxiv.org/abs/1908.04951) (ICCV 2019)
     - 4分
@@ -79,9 +80,9 @@
     - 5分
     - supervised学表示，再把每个类的features看作是高斯分布，test时计算马式距离。
     - why Mahalanobis distance? 
-        - 1.abnormal samples can be characterized better in the representation space of DNNs, rather than the “label-overfitted” output space of softmax-based posterior distribution used in the prior works for detecting them. 
-        - 2.马氏距离相比于欧氏距离考虑到各种属性之间的联系，即消除了一些属性相关性，更重要的是实验效果都比欧氏距离好。
-    - 两个trick:1.与ODIN类似的input preprocessing。2.将浅层features也考虑进来。
+        - 马氏距离相比于欧氏距离考虑到各种属性之间的联系，即消除了一些属性相关性，更重要的是实验效果都比欧氏距离好。
+    - 本质上就是把softmax分类换成了LDA，为什么会好呢？个人感觉对着OOD调超参起到了很大作用。LDA甚至需要满足特征服从高斯分布这样的假设，也就是说如果前面的表示学习做的没那么好，马氏距离也就不会这么好用了。
+    - 这里也就有一个有意思的点：表示做好了，OOD其实也就不难了，也就没什么好做的了。但其实现在大部分OOD工作就是在toy数据集上做着学好表示后的事情。什么样的OOD场景是难的且该去做的其实是值得思考的问题。
 
 - [Learning Confidence for Out-of-Distribution Detection in Neural Networks](https://arxiv.org/abs/1802.04865) (arXiv2018)
     - 3分
