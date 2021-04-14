@@ -31,6 +31,6 @@
 
 - [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
 
-- [Unsupervised](https://github.com/curryandsun/neural_network_papers/tree/main/Unsupervised)
+- [Contrastive learning](https://github.com/curryandsun/neural_network_papers/tree/main/Contrastive%20learning)
 
 - [Fine-grained](https://github.com/curryandsun/neural_network_papers/tree/main/Fine-grained)
