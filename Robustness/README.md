@@ -30,6 +30,8 @@
 # OOD Detection
 > Out-of-distribution (OOD) Detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
 
+> Following terms includes anomaly detection.
+
 
 - [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv 2021)
     - 3分
@@ -84,12 +86,6 @@
     - 本质上就是把softmax分类换成了LDA，为什么会好呢？个人感觉对着OOD调超参起到了很大作用。LDA甚至需要满足特征服从高斯分布这样的假设，也就是说如果前面的表示学习做的没那么好，马氏距离也就不会这么好用了。
     - 这里也就有一个有意思的点：表示做好了，OOD其实也就不难了，也就没什么好做的了。但其实现在大部分OOD工作就是在toy数据集上做着学好表示后的事情。什么样的OOD场景是难的且该去做的其实是值得思考的问题。
 
-- [Learning Confidence for Out-of-Distribution Detection in Neural Networks](https://arxiv.org/abs/1802.04865) (arXiv2018)
-    - 3分
-    - motivation:让nn的输出多一个分支来实现直接输出置信度c。
-    - 文中很多方法(如加一个c相关的Loss,限制c的penalty数目)最终目的仍然是为了输出的c更接近真实的置信度。
-    - 方法非常直观，但效果存疑。
-
 - [Training Confidence-calibrated Classifiers for Detecting Out-of-Distribution Samples](https://arxiv.org/abs/1711.09325) (ICLR2018)
     - 4分
     - 利用GAN来生成靠近boundary的样本当作OOD样本，约束网络在OOD样本上输出均匀分布。和[OE](https://arxiv.org/abs/1812.04606)方法很类似，只不过这里用GAN来生成而不是直接利用OOD dataset。
@@ -100,6 +96,11 @@
     - 2.neural networks have larger norm of gradient of log-softmax scores when applied on in-distribution images.
     - 根据上述两个观察，提出了用temperature scaling和类似FGSM的input preprocessing来进一步拉大ID和OOD样本输出概率分布的差别，再用max-softmax方法来判定。该方法记为ODIN。
     - 文中的OOD指标相比于baseline更加清晰。
+
+- [Deep One-Class Classification](http://proceedings.mlr.press/v80/ruff18a.html) (ICML2018)
+    - 4分
+    - 传统的kernel-based one-class方法有OCSVM以及SVDD，其中OCSVM希望将映射后的高维特征与原点更好的区分开来，也就是找到一个良好的half-space；而SVDD是希望映射后的高维特征分布在半径很小的超球内。
+    - 而本文的思路就是将SVDD中的kernel映射改为用cnn学得的表示，再用类似SVDD的优化目标端到端地优化。
 
 - [A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks](https://arxiv.org/abs/1610.02136) (ICLR2017)
     - 4分
@@ -142,7 +143,7 @@
     - 文中认为之前adversarial training的问题出在distribution  mismatch，即对抗样本和真实样本的分布是不一致的。因此可以多加一个辅助的BN，使得二者通过不同的BN以免混淆分布。
 
 - [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572) (ICLR2015)
-    - 4分
+    - 5分
     - 经典的FGSM方法。
     - 从线性模型出发，一个原始样本perturbation η如果满足无穷范数小于其图像分辨率，那么分类器理应无法分出区别。但是经过W^T*η之后，却会因为高维度而将perturbation放大而导致误分。
     - 最终的FGSM方法中，求梯度就是linearize the cost function around the current value of θ，取sign是为了obtaining an optimal max-norm constrained pertubation。
