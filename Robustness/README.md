@@ -28,9 +28,9 @@
 
 
 # OOD Detection
-> Out-of-distribution (OOD) Detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). 
+> Out-of-distribution (OOD) Detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). OOD pay more attention to detection than classification.
 
-> Following terms includes anomaly detection.
+> Following terms also include anomaly detection(AD is usually considered as a single-class case).
 
 
 - [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv 2021)
@@ -42,11 +42,6 @@
     - 4分
     - contrastive self-supervised学表示，再聚类。test时算马氏距离做OOD Detection。idea并没有什么novelty，与NIPS18的Mahalanobis方法很相似，只不过因为没有label信息，因此需要自监督+聚类来确定簇中心和协方差矩阵。
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
-
-- [Unsupervised Anomaly Detection From Semantic Similarity Scores](https://arxiv.org/abs/2012.00461) (ICLR 2021 reject)
-    - 3分
-    - movitation:contrastive learning学到的表示有[Alignment and Uniformity](https://arxiv.org/abs/2005.10242)的特点。In this representation, feature vectors from the in-distribution are semantically similar if they approximately align and semantically diverse if they are separated by a large angle. If OOD examples  are mapped onto the unit-hypersphere, they can align with training examples without being semantically similar.
-    - 实验三个100让人震惊，但尴尬的是作者更新在arXiv上发现实验做错了...
 
 - [Detecting Out-of-Distribution Examples with Gram Matrices](http://proceedings.mlr.press/v119/sastry20a.html) (ICML 2020)
     - 4分
@@ -70,9 +65,10 @@
     - 在DomainNet上做的实验非常有意思。
 
 - [Unsupervised Out-of-Distribution Detection by Maximum Classifier Discrepancy](https://arxiv.org/abs/1908.04951) (ICCV 2019)
-    - 4分
+    - 3分
     - 很有意思的idea:OOD样本更集中于boundary附近，那么用两个不同的classifier，OOD样本显然会比ID样本有更大output difference，那么就可以用这一点来做OOD detection。
-    - 需要用到unlabel的ID和OOD的混合dataset来做finetune，用来进一步Maximum Classifier Discrepancy，这点和[OE](https://arxiv.org/abs/1812.04606)方法很类似。
+    - 需要用到unlabel的ID和OOD的混合dataset来做finetune，用来进一步Maximum Classifier Discrepancy。这里其实是如果是只有OOD的dataset理论上是更好的，因此其实并没有发挥混合dataset中ID样本的作用。
+    - 实验的setting其实是transductive的，但文中并没有明确表明这点，这点很有问题。
 
 - [Deep Anomaly Detection with Outlier Exposure](https://arxiv.org/abs/1812.04606) (ICLR 2019)
     - 4分
