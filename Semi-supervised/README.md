@@ -64,15 +64,17 @@
 
 # Safe
 
-> 安全半监督学习，包括unlabeled dataset出现mismatch等setting。
+> 安全半监督学习，考虑的是unlabeled dataset中出现ood的情况。
 
 - [Safe Deep Semi-Supervised Learning for Unseen-Class Unlabeled Data](http://proceedings.mlr.press/v119/guo20i.html) (ICML2020)
     - 4分
-    - 考虑的是unlabeled dataset中出现与labeled dataset mismatch的情况。
     - 加入样本级别的w系数，希望ood样本的w尽可能小，采用了类似meta-learning的bi-level优化。
 
-- [Semi-Supervised Learning under Class Distribution Mismatch](https://ojs.aaai.org/index.php/AAAI/article/view/5763) (AAAI2020)
+- [Multi-Task Curriculum Framework forOpen-Set Semi-Supervised Learning](https://arxiv.org/abs/2007.11330) (ECCV2020)
     - 4分
-    - 考虑的是unlabeled dataset中出现与labeled dataset mismatch的情况。
+    - 同时训练OOD detector和ID classifier。不像传统的selection直接用msp选择，这里多设置了一个分支用来学一个OOD score。这里直接把label样本标为ID，unlabel样本标为OOD，这一分支就是一个二分类的noisy label问题。
+
+- [Semi-Supervised Learning under Class Distribution Mismatch](https://ojs.aaai.org/index.php/AAAI/article/view/5763) (AAAI2020)
+    - 3分
     - 采用了selection的方法，主要思想也是通过msp加阈值选出高置信度的样本认为是可利用的ID样本，为了提高confidence的可信度还采用了time维度上的ensemble。思路很简单，文章表述偏花里胡哨。
 
