@@ -14,7 +14,7 @@
 
 - 1分：粗制滥造的论文
 
-> 论文将按照年份/评分依次排序，绝大多数论文将会给出[arXiv](https://arxiv.org/)的链接.
+> 论文将按照年份依次排序，绝大多数论文将会给出[arXiv](https://arxiv.org/)的链接.
 
 
 # Table of contents
