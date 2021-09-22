@@ -26,6 +26,10 @@
 
 > 考虑Noisy + OOD。
 
+- [NGC: A Unified Framework for Learning with Open-World Noisy Data](https://arxiv.org/abs/2108.11035) (ICCV2021)
+    - 4分
+    - 本质做法是基于近邻的contrastive learning，针对Noisy + OOD的情况设计了一些基于graph的准确选取近邻的方法，读下来感觉有novelty且make sense。
+
 - [Jo-SRC: A Contrastive Approach for Combating Noisy Labels](https://arxiv.org/abs/2103.13029) (CVPR2021)
     - 3分
     - 考虑到了noisy应该分为ID noisy以及OOD noisy，因此在sample selection的时候应该分两步:1.首先分为clean与noisy样本。2.再将noisy样本分为ID与OOD(衡量两个view的输出概率分布的consistency，认为差异小的是ID)。
