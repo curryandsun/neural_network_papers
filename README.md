@@ -19,18 +19,26 @@
 
 # Table of contents
 
-- [Long-tail](https://github.com/curryandsun/neural_network_papers/tree/main/Long-tail)
+- Towards Robust Deep Learning
+    - [Long-tail](https://github.com/curryandsun/neural_network_papers/tree/main/Long-tail)
 
-- [Neural Network](https://github.com/curryandsun/neural_network_papers/tree/main/Neural%20Network)
+    - [OOD](https://github.com/curryandsun/neural_network_papers/tree/main/OOD)
 
-- [Knowledge Distilling](https://github.com/curryandsun/neural_network_papers/tree/main/Knowledge%20Distilling)
+    - [Noisy Label](https://github.com/curryandsun/neural_network_papers/tree/main/Noisy%20Label)
 
-- [Robustness](https://github.com/curryandsun/neural_network_papers/tree/main/Robustness)
+    - [Adversarial Attack](https://github.com/curryandsun/neural_network_papers/tree/main/Adversarial%20Attack)
 
-- [GCN](https://github.com/curryandsun/neural_network_papers/tree/main/GCN)
 
-- [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
+- Exploiting Unlabeled Data
 
-- [Contrastive learning](https://github.com/curryandsun/neural_network_papers/tree/main/Contrastive%20learning)
+    - [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
 
-- [Fine-grained](https://github.com/curryandsun/neural_network_papers/tree/main/Fine-grained)
+    - [Contrastive learning](https://github.com/curryandsun/neural_network_papers/tree/main/Contrastive%20learning)
+
+
+- Others
+    - [Neural Network](https://github.com/curryandsun/neural_network_papers/tree/main/Neural%20Network)
+
+    - [Knowledge Distilling](https://github.com/curryandsun/neural_network_papers/tree/main/Knowledge%20Distilling)
+
+    - [GCN](https://github.com/curryandsun/neural_network_papers/tree/main/GCN)

@@ -1,36 +1,15 @@
-# 论文阅读笔记
-
-**记录一些读过的论文，给出个人对论文的评分情况并简述论文insight**
-
-**评分细节：** 
-
-- 5分：值得反复阅读的论文，非常具有启发性
-
-- 4分：值得精读的论文，具有一定的启发性
-
-- 3分：值得粗略阅读的论文，了解论文大概思想后会有一定收获
-
-- 2分：价值不大的论文，读完基本没有收获
-
-- 1分：粗制滥造的论文
-
-> 论文将按照年份/评分依次排序，绝大多数论文将会给出[arXiv](https://arxiv.org/)的链接.
-
-
 # Table of contents
 
-- [论文阅读笔记](#论文阅读笔记)
 - [Table of Contents](#table-of-contents)
 - [OOD Detection](#OOD-detection)
 - [Open-set Recognition](#Open-set-Recognition)
-- [Adversarial](#adversarial)
-- [Noisy Label](#noisy-label)
+
 
 
 # OOD Detection
-> Out-of-distribution (OOD) Detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as in-distribution and samples outliers from another multi-class dataset(from different domains). OOD pay more attention to detection than classification.
+> Out-of-Distribution (OOD) detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as In-Distribution (ID) and considers samples from another multi-class dataset as OOD. In OOD detection, we often pay more attention to detection than classification.
 
-> Following terms also include anomaly detection(AD is usually considered as a single-class case).
+> Following terms also include anomaly detection and novelty detection(they are usually considered as the single-class case).
 
 
 - [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv 2021)
@@ -106,7 +85,7 @@
 
 # Open-Set Recognition
 
-> Open-Set Recognition(OSR): some classes of a dataset as in-distribution and some other classes as a source of outliers(from a same domain). The classifier should do well in both classfication and detection.
+> Open-Set Recognition(OSR): some classes of a dataset as in-distribution and some other classes as a source of outliers. The classifier should do well in both classfication and detection.
 
 - [Generative-Discriminative Feature Representations for Open-Set Recognition](https://openaccess.thecvf.com/content_CVPR_2020/html/Perera_Generative-Discriminative_Feature_Representations_for_Open-Set_Recognition_CVPR_2020_paper.html) (CVPR2020)
     - 3分
@@ -128,35 +107,3 @@
     - 5分
     - 将softmax改造成多出一个unknown类的openmax。
     - Assume that d of the inliers follows a  Weibull distribution：首先用每个类trainning data的logits(av)到类中心的距离去fit c个Weibull分布，测试时计算样本logits属于每个类对应分布的class-belongingness,再据此调整最后的输出概率分布。
-
-# Adversarial
-
-> Adversarial attack and defense
-
-- [Adversarial Examples Improve Image Recognition](https://arxiv.org/abs/1911.09665) (CVPR2020)
-    - 4分
-    - motivation:之前的adversarial training在大数据集上虽然可以提高鲁棒性，但都会降低在clean data上的准确率，因此作者希望通过adversarial样本来提高clean data准确率。
-    - 文中认为之前adversarial training的问题出在distribution  mismatch，即对抗样本和真实样本的分布是不一致的。因此可以多加一个辅助的BN，使得二者通过不同的BN以免混淆分布。
-
-- [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572) (ICLR2015)
-    - 5分
-    - 经典的FGSM方法。
-    - 从线性模型出发，一个原始样本perturbation η如果满足无穷范数小于其图像分辨率，那么分类器理应无法分出区别。但是经过W^T*η之后，却会因为高维度而将perturbation放大而导致误分。
-    - 最终的FGSM方法中，求梯度就是linearize the cost function around the current value of θ，取sign是为了obtaining an optimal max-norm constrained pertubation。
-
-
-
-# Noisy Label
-
-> 标签噪声。
-
-- [Jo-SRC: A Contrastive Approach for Combating Noisy Labels](https://arxiv.org/abs/2103.13029) (CVPR2021)
-    - 3分
-    - 考虑到了noisy应该分为ID noisy以及OOD noisy，因此在sample selection的时候应该分两步:1.首先分为clean与noisy样本。2.再将noisy样本分为ID与OOD(衡量两个view的输出概率分布的consistency，认为差异小的是ID)。
-
-- [Early-Learning Regularization Prevents Memorization of Noisy Labels](https://arxiv.org/abs/2007.00151) (NIPS2020)
-    - 5分
-    - motivation:DNN在noisy label的学习过程中有’early learning‘的现象:first use patterns, not brute force memorization, to fit real data，then memorize noisy label。因此，将早期模型的输出作为后期的一个正则化，有点像self-KD。
-    - 在KD中，拟合target用的是KL散度，但文中用的是内积。原因是KL散度相比内积对target的拟合程度更高，是想利用到dark knowledge，对本文来说会过拟合。
-    - 从梯度的角度说明了两点: (1) ensure that the contribution to the gradient from examples with clean labels remains large, and (2) neutralize the influence of the examples with wrong labels on the gradient.
-    - 文章的图画的是真好，看图就非常容易明白作者的idea。
