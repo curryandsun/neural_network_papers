@@ -10,7 +10,7 @@
 
 # Noisy Label
 
-> 标签噪声。
+> 标记噪声问题。[一篇很好的综述](https://arxiv.org/abs/2007.08199)。
 
 ## Robust Loss or Regularization
 
@@ -39,13 +39,13 @@
 
 ## Loss Adjustment
 
-> Loss correction, loss reweighting, or label Refurbishment.
+> Loss correction, or label correction.
 
 - [Training Deep Neural Networks on Noisy Labels with Bootstrapping](https://arxiv.org/abs/1412.6596) (ICLR2015)
 - [Dimensionality-Driven Learning with Noisy Labels](https://arxiv.org/abs/1806.02612) (ICML2018)
 - [Unsupervised Label Noise Modeling and Loss Correction](https://arxiv.org/abs/1904.11238) (ICML2019)
     - 4分
-    - Label Refurbishment.其通用套路是将noisy label与pseudo label做一个线性加权，而权重系数则是设计的重点。
+    - Label correction.其通用套路是将noisy label与pseudo label做一个线性加权，而权重系数则是设计的重点。
 
 - [Making Deep Neural Networks Robust to Label Noise: a Loss Correction Approach](https://arxiv.org/abs/1609.03683) (CVPR2017)
     - 5分
@@ -60,8 +60,20 @@
 
 ## Sample Selection
 
-> 筛出噪声样本。
+> 样本筛选。
 
+- [Decoupling "when to update" from "how to update"](https://arxiv.org/abs/1706.02613) (NIPS2017)
+- [Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels](https://arxiv.org/abs/1804.06872) (NIPS2018)
+- [How does Disagreement Help Generalization against Label Corruption?](https://arxiv.org/abs/1901.04215) (ICML2019)
+- [Combating noisy labels by agreement: A joint training method with co-regularization](https://arxiv.org/abs/2003.02752) (CVPR2020)
+    - 3分
+    - Co-teaching系列。个人感觉这系列文章方法都相当简单。
+
+- [Understanding and Utilizing Deep Neural Networks Trained with Noisy Labels](https://arxiv.org/abs/1905.05040) (ICML2019)
+    - 4分
+    - 有意思的理论分析：In [Zhang et al. (2017)](https://arxiv.org/abs/1611.03530), it has
+    been empirically found that the generalization performance of DNNs is highly dependent on the noise ratio. In this paper, the authors theoretically and empirically find that the test accuracy can be quantitatively characterized in terms of the noise ratio.
+    - 接下来很自然的想法就是用cross-validation得到test acc再用于估计noise ratio。这样就可以解决Co-teaching方法必须事先获得noise ratio的问题。
 
 ## Open-set
 
@@ -69,9 +81,14 @@
 
 - [NGC: A Unified Framework for Learning with Open-World Noisy Data](https://arxiv.org/abs/2108.11035) (ICCV2021_oral)
     - 4分
-    - 本质做法是基于近邻的contrastive learning，针对Noisy + OOD的情况设计了一些基于graph的准确选取近邻的方法，读下来感觉有novelty且make sense。
+    - 提出一个新setting：在open-set noise的基础上再考虑inference时存在OOD样本。是一个make sense的setting。
+    - 本质做法是基于近邻的contrastive learning，针对Noisy + OOD的情况设计了一些基于graph的准确选取近邻的方法。
 
 - [Jo-SRC: A Contrastive Approach for Combating Noisy Labels](https://arxiv.org/abs/2103.13029) (CVPR2021)
     - 3分
     - 考虑到了noisy应该分为ID noisy以及OOD noisy，因此在sample selection的时候应该分两步:1.首先分为clean与noisy样本。2.再将noisy样本分为ID与OOD(衡量两个view的输出概率分布的consistency，认为差异小的是ID)。
 
+- [Iterative Learning with Open-set Noisy Labels](https://arxiv.org/abs/1804.00092) (CVPR2018)
+    - 5分
+    - 第一篇考虑open-set noise的文章。方法的本质是利用feature做noisy data detection。用feature是考虑到open-set noise的存在，没办法像close-set一样做loss correction或label corretion。
+    - Cons: 没有对ID noise和OOD noise做分离以及不同的训练，而是直接把这两者同时检测出来当成是noisy data。

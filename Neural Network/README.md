@@ -27,8 +27,8 @@
     - 提出了temperature scaling方法，是在训练集上训练后，固定模型参数再通过验证集来训练后处理方法的参数。
     - overfitting manifests in probabilistic error rather than classification error.
 
-- [Understanding deep learningrequires rethinking generalization](https://arxiv.org/abs/1611.03530) (ICLR2017_Best paper)
-    - 4分
+- [Understanding deep learning requires rethinking generalization](https://arxiv.org/abs/1611.03530) (ICLR2017_Best paper)
+    - 5分
     - 实验证明了无论是输入扰动还是标签扰动，神经网络都可以百分百的拟合训练数据。那么核心问题来了，明明网络只需要暴力地去记住训练集就好，为什么实际上却有着强大的泛化能力呢?
     - 1.正则化:对泛化能力有提升，但是并不显著。
     - 2.有限样本情况下，两层Relu神经网络的表达能力。
