@@ -15,10 +15,14 @@
 
 > Reweight loss,通常是在大类和小类间做一个trade-off。
 
+- [Exploring Classification Equilibrium in Long-Tailed Object Detection](https://arxiv.org/abs/2108.07507) (ICCV2021)
+    - 4分
+    - Equilibrium Loss的核心思想是应该用训练过程中的预测值而不是类别数目去做reweight，这一点是有道理的，因为最终的分类准确率并不完全正比于类别数目，还需要考虑hard和easy的情况。Loss最终的形式与Logit Adjustment是一致的。
+
 - [Long-Tail Learning via Logit Adjustment](https://arxiv.org/abs/2007.07314) (ICLR2021_spotlight)
     - 5分
     - 这篇文章的related work写的很不错，非常清晰地涵盖了最近研究长尾分布的主要论文。
-    - 文中通过对平衡准确率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。与我们最近的一个idea非常相似，很难受。
+    - 文中通过对平衡准确率的建模，提出了新的后处理方法以及Loss调整方法。motivation非常自然，可以理解成LDAM考虑了pair-wise margin的Loss，且实验效果也不错。
 
 - [Learning imbalanced datasets with label-distribution-aware margin loss](https://arxiv.org/abs/1906.07413) (NIPS2019)
     - 4分

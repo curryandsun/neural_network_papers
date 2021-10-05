@@ -33,7 +33,9 @@
 
     - [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
 
-    - [Contrastive learning](https://github.com/curryandsun/neural_network_papers/tree/main/Contrastive%20learning)
+    - [Contrastive Learning](https://github.com/curryandsun/neural_network_papers/tree/main/Contrastive%20Learning)
+
+    - [Novel Class Discovery](https://github.com/curryandsun/neural_network_papers/tree/main/Novel%20Class%20Discovery)
 
 
 - Others

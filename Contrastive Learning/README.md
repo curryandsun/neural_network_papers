@@ -13,9 +13,15 @@
 > 对比学习的主流方法
 
 - [Bootstrap your own latent: A new approach to self-supervised Learning](https://arxiv.org/abs/2006.07733) (NIPS2020)
-- [Exploring Simple Siamese Representation Learning](https://arxiv.org/abs/2011.10566) (arXivS2020)
+- [Exploring Simple Siamese Representation Learning](https://arxiv.org/abs/2011.10566) (arXiv2020)
     - 5分。
     - 两者都是做减法的思路，都通过一个predictor来引入不对称性，使得模型不能通过简单学得一个trivial的解来使得正样本之间的表示一致，因此带来了无需使用负样本的可能性。
+
+- [Unsupervised Learning of Visual Features by Contrasting Cluster Assignments](https://arxiv.org/abs/2006.09882) (NIPS2020)
+    - 5分。
+    - SWaV。不同于对比学习中常见的直接使用表示进行对比的思想，SWaV的核心思想在于要求两个view之间cluster assignment的一致性。
+    - 为什么不直接用内积后的cluster assignment交换到另外一个view而是去解一个复杂的优化问题？这是为了加上最大熵的正则化来避免全部assign到同一个cluster上的平凡解。
+    - prototypes和网络参数是同时更新的。
 
 - [Momentum Contrast for Unsupervised Visual Representation Learning](https://arxiv.org/abs/1911.05722) (CVPR2020_oral)
     - 5分

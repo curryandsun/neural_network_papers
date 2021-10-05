@@ -75,6 +75,10 @@
     been empirically found that the generalization performance of DNNs is highly dependent on the noise ratio. In this paper, the authors theoretically and empirically find that the test accuracy can be quantitatively characterized in terms of the noise ratio.
     - 接下来很自然的想法就是用cross-validation得到test acc再用于估计noise ratio。这样就可以解决Co-teaching方法必须事先获得noise ratio的问题。
 
+- [DivideMix: Learning with Noisy Labels as Semi-supervised Learning](https://arxiv.org/abs/2002.07394) (ICLR2020)
+    - 5分
+    - 用GMM拟合loss分成clean set和noisy set，再利用mixmatch做半监督训练。
+
 ## Open-set
 
 > 考虑Noisy + OOD。
@@ -82,7 +86,7 @@
 - [NGC: A Unified Framework for Learning with Open-World Noisy Data](https://arxiv.org/abs/2108.11035) (ICCV2021_oral)
     - 4分
     - 提出一个新setting：在open-set noise的基础上再考虑inference时存在OOD样本。是一个make sense的setting。
-    - 本质做法是基于近邻的contrastive learning，针对Noisy + OOD的情况设计了一些基于graph的准确选取近邻的方法。
+    - 本质做法是基于近邻的contrastive learning，针对Noisy + OOD的情况设计了一些基于graph的准确选取近邻的方法。其中，选取LCC的这一步类似于[TopoFilter](https://arxiv.org/abs/2012.04835)，不同的是利用confidence删边替代了异类删边+LCC外围剔除的操作。
 
 - [Jo-SRC: A Contrastive Approach for Combating Noisy Labels](https://arxiv.org/abs/2103.13029) (CVPR2021)
     - 3分
