@@ -3,7 +3,7 @@
 - [Table of Contents](#table-of-contents)
 - [Semi-supervised](#semi-supervised)
     - [Basic](#basic)
-    - [Safe](#safe)
+    - [Open-set](#open-set)
 
 # Semi-supervised
 
@@ -42,15 +42,19 @@
     - 2.最小熵准则:分类面应该穿过低密度区域，即对样本输出的置信度较高，即输出分布的熵最小。通常采用样本输出与伪标签之间的交叉熵来实现。因为不管是转化为one-hot还是sharpen后的伪标签(sharpen相当于是soft版本的ont-hot)，都相较于输出分布有着更小的熵。
 
 
-# Safe
+# Open-set
 
-> 安全半监督学习，考虑的是unlabeled dataset中出现ood的情况。
+> Open-set SSL，考虑的是unlabeled data中包括OOD样本的情况。
+
+- [OpenCoS: Contrastive Semi-supervised Learning for Handling Open-set Unlabeled Data](https://arxiv.org/abs/2107.08943) (arXiv2021)
+    - 3分
+    - open-set SSL一个很直接的想法就是在unlabel data上利用contrastive learning。这篇文章可以看作一个baseline，其通过label data计算prototype，再通过cos相似度来判定ID or OOD。
 
 - [Safe Deep Semi-Supervised Learning for Unseen-Class Unlabeled Data](http://proceedings.mlr.press/v119/guo20i.html) (ICML2020)
     - 4分
     - 加入样本级别的w系数，希望ood样本的w尽可能小，采用了类似meta-learning的bi-level优化。
 
-- [Multi-Task Curriculum Framework forOpen-Set Semi-Supervised Learning](https://arxiv.org/abs/2007.11330) (ECCV2020)
+- [Multi-Task Curriculum Framework for Open-Set Semi-Supervised Learning](https://arxiv.org/abs/2007.11330) (ECCV2020)
     - 4分
     - 同时训练OOD detector和ID classifier。不像传统的selection直接用msp选择，这里多设置了一个分支用来学一个OOD score。这里直接把label样本标为ID，unlabel样本标为OOD，这一分支就是一个二分类的noisy label问题。
 

@@ -3,6 +3,7 @@
 - [Table of Contents](#table-of-contents)
 - [OOD Detection](#OOD-detection)
 - [Open-set Recognition](#Open-set-Recognition)
+- [Anomaly Detection and Localization](#anomaly-detection-and-localization)
 
 
 
@@ -11,6 +12,11 @@
 
 > Following terms also include anomaly detection and novelty detection(they are usually considered as the single-class case).
 
+- [Semantically Coherent Out-of-Distribution Detection](https://arxiv.org/abs/2108.11941) (ICCV 2021)
+    - 5分
+    - 对于benchmark的讨论很有意思：指出之前的方法near-perfect的原因可能在于对于dataset low-level feature的overfit。
+    - 方法需要用到ID与OOD混合的unlabel data,实验中直接将TinyImageNet作为unlabel data因为作者认为其本身就是混杂着ID和OOD样本的。
+    - 方法比较简单，对unlabel data做筛选，ID的就当成label data训练，OOD的就用OE。
 
 - [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv 2021)
     - 3分
@@ -107,3 +113,12 @@
     - 5分
     - 将softmax改造成多出一个unknown类的openmax。
     - Assume that d of the inliers follows a  Weibull distribution：首先用每个类trainning data的logits(av)到类中心的距离去fit c个Weibull分布，测试时计算样本logits属于每个类对应分布的class-belongingness,再据此调整最后的输出概率分布。
+
+
+# Anomaly Detection and Localization
+
+> 不仅需要检测出异常图片，还需要定位异常的位置，通常使用[MVTec AD](https://openaccess.thecvf.com/content_CVPR_2019/html/Bergmann_MVTec_AD_--_A_Comprehensive_Real-World_Dataset_for_Unsupervised_Anomaly_CVPR_2019_paper.html)数据集。
+
+- [CutPaste: Self-Supervised Learning for Anomaly Detection and Localization](https://arxiv.org/abs/2104.04015) (CVPR2021)
+    - 3分
+    - CutPaste即crop图片随机一块在粘贴到随机位置，再将这样操作后的图片认为是异常图片，就变成了二分类self-supervised问题。

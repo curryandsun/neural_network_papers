@@ -45,6 +45,11 @@
 
 > 神经网络的各种tricks,如mixup,label smooth等。
 
+- [Exponential Moving Average Normalization for Self-supervised and Semi-supervised Learning](https://arxiv.org/abs/2101.08482) (CVPR2021_oral)
+    - 5分
+    - 在使用EMA model的时候，只有模型参数是EMA的，BN中的均值和方差仍然使用当前batch的样本进行更新，这显然是不合理的。
+    - 方法简单有效，那就是把将BN的均值和方差也设置为student模型的EMA，可以解决作者所提出的Model parameter mismatch问题。
+
 - [When Does Label Smoothing Help](https://arxiv.org/abs/1906.02629) (NIPS2019)
     - 5分
     - Hinton出品，从三个方面讲label smooth的作用。
