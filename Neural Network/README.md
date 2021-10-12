@@ -38,8 +38,8 @@
 - [Learning Deep Features for Discriminative Localization](https://arxiv.org/abs/1512.04150) (CVPR2016)
     - 5分
     - CAM，广泛用于可视化模型的spatial attention。
-    - 模型最后一层activation map经过GAP之后(X)再过Linear(W)层得到logits。通常认为W中的每个类向量可以表征对应的类，这篇文章则将这个类向量中的每个值对应到activation map每个channel的重要性，那么就可以对其做channel-wise的加权和，再upsample恢复到原尺寸就可以可视化模型到底关注了图像的哪些位置。
-    - 之后出现的[Grad-CAM](https://arxiv.org/abs/1610.02391)避免了必须使用GAP，更具有广泛性。
+    - 模型最后一层activation map经过GAP之后再过Linear(W)层得到logits。activation map的每个channel可以看成是独立的表示，那么CAM就定义为channel-wise的加权和。权重来自于W（每个channel表达某类的重要性），再upsample恢复到原尺寸就可以可视化模型到底关注了图像的哪些位置。
+    - 之后出现的[Grad-CAM](https://arxiv.org/abs/1610.02391)避免了必须使用GAP，更具有广泛性。对于GAP-FC类的CNN来说，Grad-CAM中类别logit对于activation map求导后产生的结果与CAM是完全一致的，因此可以看成是CAM的一般形式。
 
 ## Tricks
 

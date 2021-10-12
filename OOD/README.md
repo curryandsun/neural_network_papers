@@ -119,6 +119,26 @@
 
 > 不仅需要检测出异常图片，还需要定位异常的位置，通常使用[MVTec AD](https://openaccess.thecvf.com/content_CVPR_2019/html/Bergmann_MVTec_AD_--_A_Comprehensive_Real-World_Dataset_for_Unsupervised_Anomaly_CVPR_2019_paper.html)数据集。
 
+- [DRAEM -- A discriminatively trained reconstruction embedding for surface anomaly detection](https://arxiv.org/abs/2108.07610) (ICCV2021)
+    - 4分
+    - simulated anomaly generation的算法比较高明。
+    - 想法有点类似GAN：生成器负责把异常图片恢复为正常图片，判别器负责找到异常图片与恢复图片的异常区域，这样在测试的时候就可以直接输出segmentation的结果。
+
 - [CutPaste: Self-Supervised Learning for Anomaly Detection and Localization](https://arxiv.org/abs/2104.04015) (CVPR2021)
     - 3分
     - CutPaste即crop图片随机一块在粘贴到随机位置，再将这样操作后的图片认为是异常图片，就变成了二分类self-supervised问题。
+
+- [PaDiM: a Patch Distribution Modeling Framework for Anomaly Detection and Localization](https://arxiv.org/abs/2011.08785) (ICPR2021)
+- [Sub-Image Anomaly Detection with Deep Pyramid Correspondences](https://arxiv.org/abs/2005.02357) (arXiv2020)
+- [Deep Nearest Neighbor Anomaly Detection](https://arxiv.org/abs/2002.10445) (arXiv2020)
+    - 4分
+    - 方法无需训练，只需要在ImageNet上pretrain的CNN。
+    - 后续的方法有image-level的，也有patch-level的；有基于KNN的，有基于混合高斯的。但本质思路就是建模normal image特征的distribution，测试时再与之进行对比。属于baseline方法，但效果出奇地好。
+
+- [Explainable Deep One-Class Classification](https://arxiv.org/abs/2007.01760) (ICLR2021)
+    - 3分
+    - 本质就是二分类情况下的[CAM](https://arxiv.org/abs/1512.04150)。所谓的upsample也并不重要，在CAM原paper中是一笔带过的。
+
+- [Patch SVDD: Patch-level SVDD for Anomaly Detection and Segmentation](https://arxiv.org/abs/2006.16067) (ACCV2020)
+    - 3分
+    - SVDD要求所有样本映射到一个中心点C附近，而Patch SVDD则要求相邻patch的特征相似。
