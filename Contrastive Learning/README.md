@@ -5,7 +5,6 @@
     - [Basic](#basic)
     - [Better Understanding](#better-understanding)
     - [Better Sampler](#better-sampler)
-    
 # Contrastive learning
 
 # Basic
@@ -85,3 +84,32 @@
     - 正样本选自Bi^Ci，负样本则是选自Bi-Bi^Ci。相当于从V中选择了价值更大的进行Loss计算。
     - 可以看成是DeepCluster和NPID方法的结合。
     - 仍局限于Memory Bank，但是提供了一种采样的新思路，即采样时不应该是随机采样，而应该从与vi更相近的点中采样。
+
+# Application in Spatial-temporal Graph
+
+> 在时空图上的应用
+
+- [Spatio-Temporal Graph Contrastive Learning](https://arxiv.org/abs/2108.11873) 
+
+  - 3分
+
+  - Background: 时空图是一种特殊的数据，由二维的图在时间维度上拼接得到。这类数据同时含有空间和时间特征。一般来说在交通预测领域中常见。 对比学习在时空图上的研究很少，这篇论文提出了一些新颖的数据增广方法从而提升模型精度和鲁棒性。
+
+  - Problem statement：通过历史交通流量图数据，预测将来时刻的数据。 
+
+  - 这篇文章贡献如下：
+
+    - 取消原来的two-stage training paradigm (pre-train and fine-tune)，而是添加一个辅助对比损失项（auxiliary contrastive loss）。
+    - 设计了如下数据增广方法：
+      1. Edge masking： 随机mask一条边。
+      2. Input masking：随机mask一个节点。
+      3. Temporal shifting：对历史数据做加权求和（类似mixup) 产生新样本。
+      4. Input smoothing: 用 Discrete Cosine Transform 将数据变换到frequency domain 做缩放减少噪声，再变换回去。
+    - 其中1,2 就是很直观的想法。 3我认为还不够general。 可以使用exponentially weighted averaging (也是一种求平均的方法）. 相比之下这种方法考虑了更多的历史数据。
+    - 同时提出了Negative filtering用来过滤掉特别相似的负样本。 在对比学习中，batch内的其他样本都被认为是负样本。而在这个问题中，这些负样本和正样本很多时候在语义上是相近的。比如说星期一早上八点到十点的流量趋势和星期二这个时间的趋势相同。 因此需要过滤掉这些样本，让模型关注于真正的负样本。 做法很简单，特征相近的样本之间有个固定的时间差（比如一天），把和正样本相隔固定时间差的样本过滤掉。
+    - 我认为过滤样本很必要，但是通过调节温度参数就能实现呀。感觉这个方法的提出有些多余。当然我没做实验，纸上谈兵而已。
+    - 代码没开源，扣一分！
+
+    
+
+  
