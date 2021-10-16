@@ -1,11 +1,11 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Noisy Label](#noisy-label)
-    - [Robust Loss or Regularization](#robust-loss-or-regularization)
-    - [Loss Adjustment](#loss-adjustment)
-    - [Sample Selection](#sample-selection)
-    - [Open-set](#open-set)
+  - [Robust Loss or Regularization](#robust-loss-or-regularization)
+  - [Loss Adjustment](#loss-adjustment)
+  - [Sample Selection](#sample-selection)
+  - [Open-set](#open-set)
 
 
 # Noisy Label

@@ -1,8 +1,8 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [OOD Detection](#OOD-detection)
-- [Open-set Recognition](#Open-set-Recognition)
+- [OOD Detection](#ood-detection)
+- [Open-Set Recognition](#open-set-recognition)
 - [Anomaly Detection and Localization](#anomaly-detection-and-localization)
 
 

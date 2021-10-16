@@ -1,10 +1,10 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Knowledge Distilling](#knowledge-distilling)
   - [Distilling From Logits](#distilling-from-logits)
   - [Distilling From Features](#distilling-from-features)
-  - [Self-KD](#self-KD)
+  - [Self-KD](#self-kd)
   - [Others](#others)
 
 # Knowledge Distilling

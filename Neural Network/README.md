@@ -1,11 +1,11 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Neural Network](#neural-network)
-    - [Interpretability](#interpretability)
-    - [Tricks](#tricks)
-    - [Hard And Easy](#hard-and-easy)
-    - [Architecture](#architecture)
+  - [Interpretability](#interpretability)
+  - [Tricks](#tricks)
+  - [Hard And Easy](#hard-and-easy)
+  - [Architecture](#architecture)
 
 # Neural Network
 

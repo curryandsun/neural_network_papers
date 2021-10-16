@@ -1,14 +1,15 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Contrastive learning](#contrastive-learning)
-    - [Basic](#basic)
-    - [Better Understanding](#better-understanding)
-    - [Better Sampler](#better-sampler)
+- [Contrastive Learning](#contrastive-learning)
+  - [Basic](#basic)
+  - [Better Understanding](#better-understanding)
+  - [Better Sampler](#better-sampler)
+  - [Dense](#dense)
     
-# Contrastive learning
+# Contrastive Learning
 
-# Basic
+## Basic
 
 > 对比学习的主流方法
 
@@ -53,7 +54,7 @@
     - DeepCluster方法，思路很简单:将通过CNN后的特征进行聚类，再用聚类的结果作为伪标签反向传播到CNN。
 
 
-# Better Understanding
+## Better Understanding
 
 > 对对比学习的理解
 
@@ -69,7 +70,7 @@
         - alignment (closeness) of features from positive pairs
         - uniformity of the induced distribution of the (normalized) features on the hypersphere
 
-# Better Sampler
+## Better Sampler
 
 > 更好的正负采样方式
 
@@ -85,3 +86,24 @@
     - 正样本选自Bi^Ci，负样本则是选自Bi-Bi^Ci。相当于从V中选择了价值更大的进行Loss计算。
     - 可以看成是DeepCluster和NPID方法的结合。
     - 仍局限于Memory Bank，但是提供了一种采样的新思路，即采样时不应该是随机采样，而应该从与vi更相近的点中采样。
+
+
+## Dense
+
+> pixel-wise contrastive learning
+
+- [Self-Supervised Visual Representations Learning by Contrastive Mask Prediction](https://arxiv.org/abs/2108.07954) (ICCV2021)
+    - 3分
+    - 取region+ROI Align用在Dense CL很合适。
+    - 个人没太明白用一个mask遮住图片的某一个region再加上mask prediction head去恢复的意义是什么。把两者都去掉就是典型的Dense CL的做法了。
+
+- [Dense Contrastive Learning for Self-Supervised Visual Pre-Training](https://arxiv.org/abs/2011.09157) (CVPR2021_oral)
+    - 5分
+    - 效果很好的Dense CL Baseline。将通用的GAP+MLP结构换成了1*1 Conv，以保证feature map的size。因为ResNet最后输出7*7的size，最后文章选用的grid size就是7。因此这样的表示其实是patch-level的。
+    - 正样本来自于增强样本所有patch表示中最接近的那一个，负样本来自于其他图片的image表示。
+    - 
+- [Unsupervised Learning of Dense Visual Representations](https://arxiv.org/abs/2011.05499) (NIPS2020)
+    - 4分
+    - 第一篇Dense CL的文章。做法也比较简单,Encoder-decoder的结构，每个pixel都有对应的表示，找到对应位置的pixel的表示作为正样本对，再用别的图片的pixel的表示作为负样本对。
+
+  

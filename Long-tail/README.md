@@ -1,11 +1,11 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Long-tail](#long-tail)
-    - [Reweight](#reweight)
-    - [Decoupling](#decoupling)
-    - [Tail Augmentation](#tail-augmentation)
-    - [Others](#others)
+  - [Reweight](#reweight)
+  - [Decoupling](#decoupling)
+  - [Tail Augmentation](#tail-augmentation)
+  - [Others](#others)
 
 # Long-tail
 

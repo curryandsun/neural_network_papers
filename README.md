@@ -17,12 +17,12 @@
 > 论文将按照年份依次排序，绝大多数论文将会给出[arXiv](https://arxiv.org/)的链接.
 
 
-# Table of contents
+# Table of Contents
 
 - Towards Robust Deep Learning
-    - [Long-tail](https://github.com/curryandsun/neural_network_papers/tree/main/Long-tail)
-
     - [OOD](https://github.com/curryandsun/neural_network_papers/tree/main/OOD)
+
+    - [Long-tail](https://github.com/curryandsun/neural_network_papers/tree/main/Long-tail)
 
     - [Noisy Label](https://github.com/curryandsun/neural_network_papers/tree/main/Noisy%20Label)
 
@@ -31,7 +31,7 @@
 
 - Exploiting Unlabeled Data
 
-    - [Semi-supervised](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised)
+    - [Semi-supervised Learning](https://github.com/curryandsun/neural_network_papers/tree/main/Semi-supervised%20Learning)
 
     - [Contrastive Learning](https://github.com/curryandsun/neural_network_papers/tree/main/Contrastive%20Learning)
 

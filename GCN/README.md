@@ -1,11 +1,11 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [GCN](#gcn)
-    - [Basic](#basic)
-    - [Over-smooth](#over-smooth)
-    - [Better Aggregation](#better-aggregation)
-    - [Others](#others)
+  - [Basic](#basic)
+  - [Over-smooth](#over-smooth)
+  - [Better Aggregation](#better-aggregation)
+  - [Others](#others)
 
 # GCN
 

@@ -1,4 +1,4 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Novel Class Discovery](#novel-class-discovery)
@@ -18,20 +18,30 @@ the latter, the working assumption is that labeled and unlabeled sets share the 
     - 3分
     - 为了充分利用label data，采用了将label data与unlabel data做mixup再self-training的方法。
 
-
 - [Neighborhood Contrastive Learning for Novel Class Discovery](https://arxiv.org/abs/2106.10731) (CVPR2021)
     - 3分
     - 在[RS](https://arxiv.org/abs/2002.05714)的基础上加上对label data的supervised contrastive learning和对所有data的neighborhood contrastive learning。
 
 - [Automatically Discovering and Learning New Visual Categories with Ranking Statistics](https://arxiv.org/abs/2002.05714) (ICLR2020)
-    - 4分
+    - 5分
     - 论文的novelty在于结合self-supervised learning以及自己提出的一个Ranking Statistics。训练可分为三步：
         - 1.全部数据上用RotNet预训练low-level features。
         - 2.冻结网络前面几层，用label data进行finetune。
         - 3.对于unlabel data，用Ranking Statistics得到相似矩阵，再用BCE进行训练。
 
+- [Multi-class Classification without Multi-class Labels](https://arxiv.org/abs/1901.00544) (ICLR2019)
+    - 3分
+    - 与[KCL](https://arxiv.org/abs/1711.10125)一个套路，只不过把衡量相似度的方法由KL散度换成了内积，形式上更加简洁了。
+
+
 - [Learning to Discover Novel Visual Categories via Deep Transfer Clustering](https://arxiv.org/abs/1908.09884) (ICCV2019)
     - 4分
     - label data上pretrain再在unlabel data上做cluster的思路。
     - 文中提到了估计unlabel data类别数目的方法。大体就是划分出验证集，然后枚举不同的K做K-means，选择效果最好的那个K。
+
+- [Learning to cluster in order to transfer across domains and tasks](https://arxiv.org/abs/1711.10125) (ICLR2018)
+    - 4分
+    - 核心思想是把原有的类别信息不好迁移，那就迁移similarity信息。
+    - 做法是利用label data训练一个similarity prediction netwrok，再用其生成unlabel data的pseudo similarity用于训练。
+
 

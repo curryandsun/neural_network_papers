@@ -1,15 +1,15 @@
-# Table of contents
+# Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Semi-supervised](#semi-supervised)
-    - [Basic](#basic)
-    - [Open-set](#open-set)
+- [Semi-supervised Learning](#semi-supervised-learning)
+  - [Basic](#basic)
+  - [Open-set](#open-set)
 
-# Semi-supervised
+# Semi-supervised Learning
 
 > 半监督学习。
 
-# Basic
+## Basic
 
 > 主流的半监督学习方法，主要集中于vision领域。
 
@@ -42,7 +42,7 @@
     - 2.最小熵准则:分类面应该穿过低密度区域，即对样本输出的置信度较高，即输出分布的熵最小。通常采用样本输出与伪标签之间的交叉熵来实现。因为不管是转化为one-hot还是sharpen后的伪标签(sharpen相当于是soft版本的ont-hot)，都相较于输出分布有着更小的熵。
 
 
-# Open-set
+## Open-set
 
 > Open-set SSL，考虑的是unlabeled data中包括OOD样本的情况。
 
