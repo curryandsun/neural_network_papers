@@ -46,6 +46,10 @@
 
 > Open-set SSL，考虑的是unlabeled data中包括OOD样本的情况。
 
+- [OpenMatch: Open-set Consistency Regularization for Semi-supervised Learning with Outliers](https://arxiv.org/abs/2105.14148) (NIPS2021)
+    - 4分
+    - 将classfier换成OVA的想法很有意思，因为softmax注定只能将样本预测为某一个类别，而OVA针对每一个类别，预测样本是否为该类别，那么也就有可能存在不是任何类别的预测，也就是OOD样本。这个motivation非常自然。
+  
 - [OpenCoS: Contrastive Semi-supervised Learning for Handling Open-set Unlabeled Data](https://arxiv.org/abs/2107.08943) (arXiv2021)
     - 3分
     - open-set SSL一个很直接的想法就是在unlabel data上利用contrastive learning。这篇文章可以看作一个baseline，其通过label data计算prototype，再通过cos相似度来判定ID or OOD。

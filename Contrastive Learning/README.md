@@ -58,6 +58,14 @@
 
 > 对对比学习的理解
 
+- [Decoupled Contrastive Learning](https://arxiv.org/abs/2110.06848#) (ICLR under review)
+    - 5分
+    - 分析了InfoNCE Loss的梯度，其中都有共同所谓NPC项，导致positive和negative是couple在一起的，这就导致两个问题：
+      - When the positive sample is close to the anchor and less informative, the gradient from the negative samples are also reduced.
+      - When the negative samples are far away and less informative, the learning rate from the positive sample is mistakenly reduced.
+    - 因此，直接的想法就是去掉NPC项实现两者的decouple，作者通过移除分母中的postive项来实现这一点。
+    - 从直觉上来说，移除分母中的postive项可以增大其中negative项的影响，从而带来了小batch-size的可能性。
+
 - [What Should Not Be Contrastive in Contrastive Learning](https://arxiv.org/abs/2008.05659v2) (ICLR2021)
 - [What Makes for Good Views for Contrastive Learning?](https://arxiv.org/abs/2005.10243) (NIPS2020)
     - 5分

@@ -83,6 +83,11 @@
 
 > 考虑Noisy + OOD。
 
+- [Learning from Noisy Data with Robust Representation Learning](https://openaccess.thecvf.com/content/ICCV2021/papers/Li_Learning_From_Noisy_Data_With_Robust_Representation_Learning_ICCV_2021_paper.pdf) (ICCV2021)
+- [MoPro: Webly Supervised Learning with Momentum Prototypes](https://arxiv.org/abs/2009.07995)(ICLR2021)
+    - 4分
+    - 一作都是[[PCL](Prototypical Contrastive Learning of Unsupervised Representations)](https://arxiv.org/abs/2005.04966)的作者，这两篇文章相当于给PCL找了个在open-set noise上的应用。
+
 - [NGC: A Unified Framework for Learning with Open-World Noisy Data](https://arxiv.org/abs/2108.11035) (ICCV2021_oral)
     - 4分
     - 提出一个新setting：在open-set noise的基础上再考虑inference时存在OOD样本。是一个make sense的setting。
