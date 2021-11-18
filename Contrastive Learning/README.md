@@ -58,8 +58,8 @@
 
 > 对对比学习的理解
 
-- [Decoupled Contrastive Learning](https://arxiv.org/abs/2110.06848#) (ICLR under review)
-    - 5分
+- [Decoupled Contrastive Learning](https://arxiv.org/abs/2110.06848#) (ICLR2022 under review)
+    - 4分
     - 分析了InfoNCE Loss的梯度，其中都有共同所谓NPC项，导致positive和negative是couple在一起的，这就导致两个问题：
       - When the positive sample is close to the anchor and less informative, the gradient from the negative samples are also reduced.
       - When the negative samples are far away and less informative, the learning rate from the positive sample is mistakenly reduced.
@@ -81,6 +81,11 @@
 ## Better Sampler
 
 > 更好的正负采样方式
+
+- [Incremental False Negative Detection for Contrastive Learning](https://arxiv.org/abs/2106.03719) (ICLR2022_under review)
+    - 4分
+    - 探究contrastive learning中存在的False Negative问题。提出的方法可以检测出False Negative，并将其从负样本集合中移除（或类似[SupCon](https://arxiv.org/abs/2004.11362)一样加入正样本集合）。显然该方法下界为SimCLR，上界为SupCon。
+    - 利用聚类做False Negative检测的想法也非常直接，即特征越接近，则越有可能是False Negative。
 
 - [Unsupervised Deep Learning by Neighbourhood Discovery](https://arxiv.org/abs/1904.11567) (ICML2019)
     - 4分

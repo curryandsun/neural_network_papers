@@ -62,30 +62,39 @@
 
 > 样本筛选。
 
-- [Decoupling "when to update" from "how to update"](https://arxiv.org/abs/1706.02613) (NIPS2017)
-- [Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels](https://arxiv.org/abs/1804.06872) (NIPS2018)
-- [How does Disagreement Help Generalization against Label Corruption?](https://arxiv.org/abs/1901.04215) (ICML2019)
-- [Combating noisy labels by agreement: A joint training method with co-regularization](https://arxiv.org/abs/2003.02752) (CVPR2020)
-    - 3分
-    - Co-teaching系列。个人感觉这系列文章方法都相当简单。
+- [DivideMix: Learning with Noisy Labels as Semi-supervised Learning](https://arxiv.org/abs/2002.07394) (ICLR2020)
+    - 5分
+    - 用GMM拟合loss分成clean set和noisy set，再利用mixmatch做半监督训练。
 
 - [Understanding and Utilizing Deep Neural Networks Trained with Noisy Labels](https://arxiv.org/abs/1905.05040) (ICML2019)
     - 4分
     - 有意思的理论分析：In [Zhang et al. (2017)](https://arxiv.org/abs/1611.03530), it has
     been empirically found that the generalization performance of DNNs is highly dependent on the noise ratio. In this paper, the authors theoretically and empirically find that the test accuracy can be quantitatively characterized in terms of the noise ratio.
     - 接下来很自然的想法就是用cross-validation得到test acc再用于估计noise ratio。这样就可以解决Co-teaching方法必须事先获得noise ratio的问题。
+  
+- [Decoupling "when to update" from "how to update"](https://arxiv.org/abs/1706.02613) (NIPS2017)
+- [Co-teaching: Robust Training of Deep Neural Networks with Extremely Noisy Labels](https://arxiv.org/abs/1804.06872) (NIPS2018)
+- [How does Disagreement Help Generalization against Label Corruption?](https://arxiv.org/abs/1901.04215) (ICML2019)
+- [Combating noisy labels by agreement: A joint training method with co-regularization](https://arxiv.org/abs/2003.02752) (CVPR2020)
+    - 3分
+    - Co-teaching系列。
 
-- [DivideMix: Learning with Noisy Labels as Semi-supervised Learning](https://arxiv.org/abs/2002.07394) (ICLR2020)
-    - 5分
-    - 用GMM拟合loss分成clean set和noisy set，再利用mixmatch做半监督训练。
+
+
+
 
 ## Open-set
 
 > 考虑Noisy + OOD。
 
+- [Open-set Label Noise Can Improve Robustness Against Inherent Label Noise](https://arxiv.org/abs/2106.10891) (NIPS2021)
+    - 4分
+    - 很有意思的文章。提出open-set noise可以是有益的。
+    - 通过不断变换open-set data的label来给模型训练增加难度，consume the extra representation capacity of neural networks, thereby preventing the neural network from overfitting inherent noisy labels.
+
 - [Learning from Noisy Data with Robust Representation Learning](https://openaccess.thecvf.com/content/ICCV2021/papers/Li_Learning_From_Noisy_Data_With_Robust_Representation_Learning_ICCV_2021_paper.pdf) (ICCV2021)
 - [MoPro: Webly Supervised Learning with Momentum Prototypes](https://arxiv.org/abs/2009.07995)(ICLR2021)
-    - 4分
+    - 3分
     - 一作都是[[PCL](Prototypical Contrastive Learning of Unsupervised Representations)](https://arxiv.org/abs/2005.04966)的作者，这两篇文章相当于给PCL找了个在open-set noise上的应用。
 
 - [NGC: A Unified Framework for Learning with Open-World Noisy Data](https://arxiv.org/abs/2108.11035) (ICCV2021_oral)

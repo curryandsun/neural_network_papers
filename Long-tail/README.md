@@ -74,7 +74,23 @@
 
 ## Others
 
-> 包括group和ensemble的方法。
+> 其它。
+
+- [Self-supervised Learning is More Robust to Dataset Imbalance](https://arxiv.org/abs/2110.05025) (ICLR2022_under review)
+- [Exploring Balanced Feature Spaces for Representation Learning](https://openreview.net/forum?id=OqtLIabPTit) (ICLR2021)
+    - 4分
+    - 探究self-supervised learning在long-tailed数据集上将学得如何的表示。
+      - "more balanced":在各类的linear classification表现上差异很小。
+      - "more robust":对于在balanced以及long-tailed数据集上的linear classification性能gap，SSL要小于CE (但CE的总体性能仍是优于SSL的，这里只比较gap)。
+      - "more transferable":对于迁移到下游任务的表现来说，SSL要优于CE。
+    - 以上都说明SSL学到的是label-irrelevant的更generalized特征。
+
+- [Improving Contrastive Learning on Imbalanced Seed Data via Open-World Sampling](https://arxiv.org/abs/2111.01004) (NIPS2021)
+    - 3分
+    - 看完对setting有以下疑惑：
+      - 为什么要有一个seed data？（感觉应该是只有一个包含LT和OOD的巨大的open-world data，然后从里面进行sample）
+      - seed data是ImageNet-100-LT，而open-world data是ImageNet-900，这难道不是全部都OOD了？
+      - 为什么seed data是LT的但open-world data却是balanced？
 
 - [Long-tailed Recognition by Routing Diverse Distribution-Aware Experts](https://arxiv.org/abs/2010.01809) (ICLR2021_spotlight)
     - 4分
