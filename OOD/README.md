@@ -12,50 +12,52 @@
 
 > Following terms also include anomaly detection and novelty detection(they are usually considered as the single-class case).
 
-- [Semantically Coherent Out-of-Distribution Detection](https://arxiv.org/abs/2108.11941) (ICCV 2021)
+> 不错的一篇[综述](https://arxiv.org/abs/2110.11334)，对于AD,ND,OSR,OOD等相关领域做了较为清晰的定义和区分。
+
+- [Semantically Coherent Out-of-Distribution Detection](https://arxiv.org/abs/2108.11941) (ICCV2021)
     - 5分
     - 对于benchmark的讨论很有意思：指出之前的方法near-perfect的原因可能在于对于dataset low-level feature的overfit。
-    - 方法需要用到ID与OOD混合的unlabel data,实验中直接将TinyImageNet作为unlabel data因为作者认为其本身就是混杂着ID和OOD样本的。
+    - 方法需要用到ID与OOD混合的unlabel data,实验中直接将TinyImageNet作为unlabel data因为其本身就是混杂着ID和OOD样本的。而测试集中包含TinyImageNet的test data，其ID的部分可以认为是存在covariate shift问题，需要正确分类；而OOD的部分则同时存在covariate shift和label shift问题，需要检测出来。
     - 方法比较简单，对unlabel data做筛选，ID的就当成label data训练，OOD的就用OE。
 
-- [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv 2021)
+- [Bridging In- and Out-of-distribution Samples for Their Better Discriminability](https://arxiv.org/abs/2101.02500) (arXiv2021)
     - 3分
     - motivation:use corrupted images as the intermediate of ID and OOD.
     - 对每种transformation定义一个soft label，而这个soft label对应于这种transformation后的在原ID网络中的acc，也就是说acc越低认为corrupt更严重，则更偏向于OOD。
 
-- [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR 2021)
+- [SSD: A Unified Framework for Self-Supervised Outlier Detection](https://openreview.net/forum?id=v5gjXpmR8J) (ICLR2021)
     - 4分
     - contrastive self-supervised学表示，再聚类。test时算马氏距离做OOD Detection。idea并没有什么novelty，与NIPS18的Mahalanobis方法很相似，只不过因为没有label信息，因此需要自监督+聚类来确定簇中心和协方差矩阵。
     - 对数据的access分的很清晰:如果可以用in-distribution的label?那就把contrastive变为supervised contrastive；如果可以用少量OOD data?引入所谓的few-shot OOD setting，其实就是将OOD data也考虑在距离的计算之内从而更为精准。
 
-- [Detecting Out-of-Distribution Examples with Gram Matrices](http://proceedings.mlr.press/v119/sastry20a.html) (ICML 2020)
+- [Detecting Out-of-Distribution Examples with Gram Matrices](http://proceedings.mlr.press/v119/sastry20a.html) (ICML2020)
     - 4分
     - 所谓的Gram Matrices其实就是一个样本activation map(c*h*w)中channel-wise correlations(c*c),那么其实这个就可以表征训练集的一些特征，测试样本若与其bia较大则可以认为是OOD。
     - 这其实和KD里面用feature来蒸馏的做法很类似，能不能把KD那套搬到OOD里面来用?
 
-- [CSI: Novelty Detection via Contrastive Learningon Distributionally Shifted Instances](https://arxiv.org/abs/2007.08176) (NIPS 2020)
+- [CSI: Novelty Detection via Contrastive Learningon Distributionally Shifted Instances](https://arxiv.org/abs/2007.08176) (NIPS2020)
     - 4分
     - contrastive学表示再打分的大框架。
     - 有意思的一个点是:In particular, we verify that the “hard” augmentations, thought to be harmful for contrastive representation learning, can be helpful for OOD detection.也就是将“hard” augmentations后的样本作为neg项加入contrastive loss的计算，这样学到的表示对classify没有提升，但对OOD有帮助。
 
-- [Contrastive Training for Improved Out-of-Distribution Detection](https://arxiv.org/abs/2007.05566) (arXiv 2020)
+- [Contrastive Training for Improved Out-of-Distribution Detection](https://arxiv.org/abs/2007.05566) (arXiv2020)
     - 3分
     - supervised + contrastive学表示，test时计算与每个类的马氏距离。也就是利用contrastive生成更general的features,想法类似于[Generative-Discriminative Feature Representations for Open-Set Recognition](https://openaccess.thecvf.com/content_CVPR_2020/html/Perera_Generative-Discriminative_Feature_Representations_for_Open-Set_Recognition_CVPR_2020_paper.html)。
 
-- [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR 2020)
+- [Generalized ODIN: Detecting Out-of-distribution Image without Learning from Out-of-distribution Data](https://arxiv.org/abs/2002.11297) (CVPR2020)
     - 4分
     - motivation:在train以及valid过程中，应该保持OOD dataset是unseen状态。
     - 在之前的包括ODIN,Maha等方法中，其超参其实是对着测试集的OOD dataset调的，而这显然是错误且在现实应用中无法接受的。
     - 文中的核心贡献应该是对ODIN方法做了改进，使得其超参无需在OOD dataset中调得。文中大篇幅的概率方面的解释偏于讲故事。
     - 在DomainNet上做的实验非常有意思。
 
-- [Unsupervised Out-of-Distribution Detection by Maximum Classifier Discrepancy](https://arxiv.org/abs/1908.04951) (ICCV 2019)
+- [Unsupervised Out-of-Distribution Detection by Maximum Classifier Discrepancy](https://arxiv.org/abs/1908.04951) (ICCV2019)
     - 3分
     - 很有意思的idea:OOD样本更集中于boundary附近，那么用两个不同的classifier，OOD样本显然会比ID样本有更大output difference，那么就可以用这一点来做OOD detection。
     - 需要用到unlabel的ID和OOD的混合dataset来做finetune，用来进一步Maximum Classifier Discrepancy。这里其实是如果是只有OOD的dataset理论上是更好的，因此其实并没有发挥混合dataset中ID样本的作用。
     - 实验的setting其实是transductive的，但文中并没有明确表明这点，这点很有问题。
 
-- [Deep Anomaly Detection with Outlier Exposure](https://arxiv.org/abs/1812.04606) (ICLR 2019)
+- [Deep Anomaly Detection with Outlier Exposure](https://arxiv.org/abs/1812.04606) (ICLR2019)
     - 4分
     - motivation:用OOD dataset对训练好的nn做finetune(如使得OOD data的输出分布更接近均匀分布),期望其泛化到test时的OOD data中。也就是说该方法needs access to some OOD datasets。
 
@@ -111,8 +113,11 @@
 
 - [Towards Open Set Deep Networks](https://arxiv.org/abs/1511.06233) (CVPR2016)
     - 5分
-    - 将softmax改造成多出一个unknown类的openmax。
-    - Assume that d of the inliers follows a  Weibull distribution：首先用每个类trainning data的logits(av)到类中心的距离去fit c个Weibull分布，测试时计算样本logits属于每个类对应分布的class-belongingness,再据此调整最后的输出概率分布。
+    - 训练时仍采用softmax，测试时将softmax改造成多出一个unknown类的openmax。具体来说分为以下几步：
+      - 对于类j，找到所有正确分类为该类的training data，取出所有logits的第j项，计算所有到中心的距离并排序，用最大的n个做极值理论分析（Extreme Value Theory），即去fit Weibull分布。
+      - 测试时计算样本logits每一项到中心的距离，代入Weibull分布计算属于inlier的概率w，再对logits做calibration，并得到新的第K+1项，再使用softmax即得到K+1项的概率。
+    - [Extreme Value Theory](https://en.wikipedia.org/wiki/Extreme_value_theory)用于刻画n个i.i.d.随机变量的最大值在n趋向于无穷时的分布，在本文中体现在取最大的n个到中心的距离去fit Weibull分布。
+    - 可以看出openmax的核心思想在于建模ID数据的logits，认为logits与ID数据分布偏差较大的可能是OOD。
 
 
 # Anomaly Detection and Localization
