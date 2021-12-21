@@ -15,7 +15,14 @@
 
 > 神经网络的可解释性相关文章。
 
-- [Do Wide and Deep Networks Learn the Same Things? Uncovering How Neural Network Representations Vary with Width and Depth](https://arxiv.org/abs/2010.15327) (ICLR2021 under review)
+- [Revisiting the Calibration of Modern Neural Networks](https://arxiv.org/abs/2106.07998) (NIPS2021)
+    - 4分
+    - 用大量实验revisit calibration。有意思的几个现象：
+      - The best current models, including the non-convolutional MLP-Mixer and Vision Transformers, are well calibrated compared to past models and their performance is more robust to distribution shift.
+      - In-distribution calibration slightly deteriorates with increasing model size (类似于之前工作的发现), but this is out-weighed by a simultaneous improvement in accuracy.
+      - Under distribution shift, calibration improves with model size, reversing the trend seen in-distribution. Accuracy and calibration are correlated under distribution shift, such that optimizing for accuracy may also benefit calibration.
+
+- [Do Wide and Deep Networks Learn the Same Things? Uncovering How Neural Network Representations Vary with Width and Depth](https://arxiv.org/abs/2010.15327) (ICLR2021)
     - 3分
     - 实验性的文章。发现了一个'block structure'现象:即Resnet相对于数据集过参数化后,有很多laryer输出相似的特征，即是冗余的。个人感觉这个现象是比较显然的，Resnet的跳接就是想做这样的事情。文中也没有讨论别的网络是否有这样的现象(reviewer也提到了这一点)。
     - 比较有意思的一点是，文中发现较深或者较宽的网络最终虽然有着相似的acc，但是对于对于某些类，两者的acc却差很多(好而不同?有集成的潜质)。甚至在某些类上，小型网络能比大型网络做的更好。

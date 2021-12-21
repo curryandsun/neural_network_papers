@@ -8,11 +8,15 @@
 
 
 # OOD Detection
-> Out-of-Distribution (OOD) detection(similiar with anomaly detection, novelty detection): it considers a multi-class dataset as In-Distribution (ID) and considers samples from another multi-class dataset as OOD. In OOD detection, we often pay more attention to detection than classification.
+> Out-of-Distribution (OOD) detection: OOD这个定义很大，包括semantic shift, domain shift等都可以被称为OOD。其中，将一个数据划分为两个部分可以认为是只存在semantic shift(相当于OSR)，而使用两个数据集则可以认为是同时存在semantic shift和domain shift。当前OOD detection大多数文章仍兼顾multi-class分类以及OOD检测。如果只考虑后者，则更多会被定义为anomaly detection或novelty detection。
 
 > Following terms also include anomaly detection and novelty detection(they are usually considered as the single-class case).
 
 > 不错的一篇[综述](https://arxiv.org/abs/2110.11334)，对于AD,ND,OSR,OOD等相关领域做了较为清晰的定义和区分。
+
+- [Exploring the Limits of Out-of-Distribution Detection](https://arxiv.org/abs/2106.03004) (NIPS2021)
+    - 3分
+    - large-scale pre-trained transformers有利于OOD检测。
 
 - [Semantically Coherent Out-of-Distribution Detection](https://arxiv.org/abs/2108.11941) (ICCV2021)
     - 5分
@@ -93,8 +97,16 @@
 
 # Open-Set Recognition
 
-> Open-Set Recognition(OSR): some classes of a dataset as in-distribution and some other classes as a source of outliers. The classifier should do well in both classfication and detection.
+> Open-Set Recognition(OSR): 需要同时做好分类和检测。且OSR中的open-set更接近于只有semantic shift，而不考虑low-level distributional shift或者说domain shift。
 
+- [Open-Set Recognition: A Good Closed-Set Classifier is All You Need](https://arxiv.org/abs/2110.06207) (ICLR2022_under review)
+    - 5分
+    - 从实验上验证了ID classfier的分类性能和检测性能是高度线性相关的。
+    - 此处的分类性能指的是泛化能力，因此增大模型capacity，data augmentation等可以提高模型泛化性能的方法都可以提高其检测性能。而如果分类性能是由于overfit来提高的，那么是不能提高检测性能的。
+    - 对这个现象可以有两个解释：
+      - 与calibration联系起来。提高模型泛化能力可以提高模型的calibration under distribution shift，那么对于OOD样本的刻画也就更加精准。
+      - 从feature的角度来讲。一般来说，ID的样本要比OOD样本拥有更大的feature norm，而stronger cross-entropy models project features further from the origin, while still ensuring that any ‘uncertain’ samples have lower feature norms (OOD samples are interpreted as ‘uncertain’ during evaluation).
+  
 - [Generative-Discriminative Feature Representations for Open-Set Recognition](https://openaccess.thecvf.com/content_CVPR_2020/html/Perera_Generative-Discriminative_Feature_Representations_for_Open-Set_Recognition_CVPR_2020_paper.html) (CVPR2020)
     - 3分
     - motivation:auto-encoder + rotation loss来提高instance-wise的表示。
