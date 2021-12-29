@@ -26,7 +26,7 @@
 
     - [Noisy Label](https://github.com/curryandsun/neural_network_papers/tree/main/Noisy%20Label)
 
-    - [Domain Adaptation](https://github.com/curryandsun/neural_network_papers/tree/main/Domain%20Adaptation)
+    - [Domain Shift](https://github.com/curryandsun/neural_network_papers/tree/main/Domain%20Shift)
 
     - [Adversarial Attack](https://github.com/curryandsun/neural_network_papers/tree/main/Adversarial%20Attack)
 
