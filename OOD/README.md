@@ -14,6 +14,13 @@
 
 > 不错的一篇[综述](https://arxiv.org/abs/2110.11334)，对于AD,ND,OSR,OOD等相关领域做了较为清晰的定义和区分。
 
+- [ReAct: Out-of-distribution Detection With Rectified Activations](https://arxiv.org/abs/2111.12797) (NIPS2021)
+    - 5分
+    - OOD问题中的一个公认的异常问题：模型对部分OOD样本输出高confidence。
+    - 文中认为这个问题是由于OOD样本的activations也就是features会出现一些异常的非常高的值，因此修剪之后模型在OOD样本上的logit的降低幅度将大于ID样本，从而ID和OOD样本更容易区分。这个思路和ODIN中的两个trick类似。
+    - 那么为什么OOD样本的features会出现一些异常的非常高的值呢？文中用BN来解释很有趣：测试时BN中的统计量是用的ID样本的移动平均，当输入OOD样本时，BN就无法正常的norm，因此产生了异常。文中也验证了将BN用OOD样本的统计量替代后则可以消除这种异常。
+    - 也就是说BN可能只适用于iid环境，在non-iid的环境中使用BN都需要考虑distribution shift可能带来的影响。如有用两个BN解决distribution mismatch的[做法](https://arxiv.org/abs/1911.09665)。
+
 - [Exploring the Limits of Out-of-Distribution Detection](https://arxiv.org/abs/2106.03004) (NIPS2021)
     - 3分
     - large-scale pre-trained transformers有利于OOD检测。

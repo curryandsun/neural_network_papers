@@ -53,14 +53,20 @@
 
 # OOD Generalization
 
-> 包括Domain Generalization(通常关注multi-source training data的图片分类问题)，具体概念可以参考[关于OOD generalization的综述](https://arxiv.org/abs/2108.13624)。其与Domain Adaptation的区别在于训练时没有target domain的知识，因此是一个更难的任务。
+> 包括Domain Generalization(通常关注multi-source training data的图片分类问题)，具体概念可以参考[关于OOD generalization的综述](https://arxiv.org/abs/2108.13624)。其与Domain Adaptation的区别在于训练时没有target domain的知识，因此是一个更难的任务。其中DG又分为有或没有domain-label的两种setting，现在的研究更关注后者。
+
+- [A Style and Semantic Memory Mechanism for Domain Generalization](https://arxiv.org/abs/2112.07517) (ICCV2021)
+    - 3分
+    - 如果想把contrastive learning用到DG中该怎么用？这篇文章给了一个很好的范式。
+    - 总体来说，就是先类似[DSN](https://arxiv.org/abs/1608.06019)一样将feature分解为正交的semantic feature和domain feature两部分，再对两者分别做类似MoCo的contrastive learning。
 
 - [Learning to Diversify for Single Domain Generalization](https://arxiv.org/abs/2108.11726) (ICCV2021)
 - [Domain Generalization with MixStyle](https://arxiv.org/abs/2104.02008) (ICLR2021)
-    - 3分
-    - 重要假设：visual domain is closely related to image style。
-    - 出发点在于，如果训练数据中本身就有充足的domain，那么ERM就可以提取到domain-invariant的特征，因此一个显而易见的做法就是domain augmentation。
-    - 两篇文章的核心都是通过style transfer的方法（具体做法类似[AdaIN](https://arxiv.org/abs/1703.06868)）来做domain augmentation。
+- [Domain Generalization Using a Mixture of Multiple Latent Domains](https://arxiv.org/abs/1911.07661v1) (AAAI2020)
+    - 4分
+    - 三篇文章共同的重要假设：visual domain is closely related to image style。
+    - 前两篇文章通过style transfer的方法（具体做法类似[AdaIN](https://arxiv.org/abs/1703.06868)）来做domain augmentation。
+    - 第三篇文章通过style cluster来确定domain-label，再用传统的adversarial框架。
 
 - [Deep Stable Learning for Out-Of-Distribution Generalization](https://arxiv.org/abs/2104.07876) (CVPR2021)
     - 3分
@@ -68,10 +74,22 @@
       - 如何在DNN的feature space上刻画non-linear dependencies？文中采用了RFF来刻画feature space两个维度之间的关联，并通过reweight来尽可能减少各个维度之间的关联，即所谓的learning sample weights for decorrelation。
       - 如何避免global reweight的高资源开销？文中采用了saving and reloading stratagy，类似于contrastive learning中的memory bank。
 
+- [DecAug: Out-of-Distribution Generalization via Decomposed Feature Representation and Semantic Augmentation](https://arxiv.org/abs/2012.09382) (AAAI2021)
+    - 4分
+    - 对数据集domain shift程度划分出两个标准，比较有趣：
+      - Correlation：即domain与semantic label的相关性，相关性越强，也就越难学到domain-irrelevant的特征，任务也就越难。
+      - Diversity：即存在的domain的多样性。
+    - 不同于[DSN](https://arxiv.org/abs/1608.06019)中直接优化两个feature正交，文中的优化classification loss和domain loss对feature的两个梯度正交。这样确保了feature对两个loss的贡献方向是正交的，也就可以通过文中的两个branch把这正交的两部分分别提取出来作为semantic feature以及domain feature。
+
 - [Self-Challenging Improves Cross-Domain Generalization](https://arxiv.org/abs/2007.02454) (ECCV2020_oral)
     - 4分
     - 根据loss对feature的梯度做了类似dropout的事情，扔掉梯度大的地方，强制模型去关注所有feature（问题：这样可能会扔掉前景的特征反而让模型更关注背景？个人感觉这个方法work的点更偏向于防止overfit到source domain上）。
     - 具体实现时即有spatial-wise又有channel-wise。
+
+- [Domain Generalization by Solving Jigsaw Puzzles](https://arxiv.org/abs/1903.06864) (CVPR2019)
+    - 3分
+    - Jigsaw Puzzles这样的self-supervised signals有利于DG。那么rotate或者contrastive learning有用吗？
+    - 这个做法没有用到training data存在多个domain的这一点。
 
 - [Stable Prediction across Unknown Environments](https://arxiv.org/abs/1806.06270) (KDD2018)
     - 4分
