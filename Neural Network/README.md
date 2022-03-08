@@ -48,6 +48,17 @@
     - 模型最后一层activation map经过GAP之后再过Linear(W)层得到logits。activation map的每个channel可以看成是独立的表示，那么CAM就定义为channel-wise的加权和。权重来自于W（每个channel表达某类的重要性），再upsample恢复到原尺寸就可以可视化模型到底关注了图像的哪些位置。
     - 之后出现的[Grad-CAM](https://arxiv.org/abs/1610.02391)避免了必须使用GAP，更具有广泛性。对于GAP-FC类的CNN来说，Grad-CAM中类别logit对于activation map求导后产生的结果与CAM是完全一致的，因此可以看成是CAM的一般形式。
 
+- [How transferable are features in deep neural networks?](https://arxiv.org/abs/1411.1792) (NIPS2014_oral)
+    - 5分
+    - 纯实验文章，全文没有一个公式。主要想回答两个问题：
+      - 都说DNN浅层学到的是general feature，而深层学到的时specific feature，那么具体到每一层会如何？是在DNN的哪个地方发生了general到specific的改变？
+      - transfer learning中该如何选择freeze或fine-tune？
+    - 全文的核心就是Figure2，其中有很多有意思的发现：
+      - BnB在3，4，5层的performance drops due to fragile co-adaptation:features that interact with each other in a complex or fragile way such that this co-adaptation could not be relearned by the upper layers alone.
+      - AnB显示在当前task中，学到的general feature大致在前三层，且越往后越specific。
+      - AnB+高于BnB+显示出transfer learning的优越性：transferring features will boost generalization performance even if the target dataset is large。
+
+
 ## Tricks
 
 > 神经网络的各种tricks,如mixup,label smooth等。
@@ -109,17 +120,17 @@
 - [Non-local Neural Networks](https://arxiv.org/abs/1711.07971) (CVPR2018)
     - 5分
     - spatial-wise attention。
-    - 注意这里的attention map是hw*hw尺度的，建模的是spatial-wise两两之间的联系，而不是h*w这样建模的是每个点的重要性。
+    - 注意这里的attention map是hw\*hw尺度的，建模的是spatial-wise两两之间的联系，而不是h\*w这样建模的是每个点的重要性。
 
 - [Squeeze-and-Excitation Networks](https://arxiv.org/abs/1709.01507) (CVPR2018)
     - 5分
     - SEnet:channel-wise attention。
-    - 建模通道之间的关系，通过网络的全局损失函数自适应的重新矫正通道之间的特征相应强度。是一个c尺度的attention，通过global pool(->c\*1*1)+FC+sigmoid得到attention系数。对于Resnet来说，可以加入每一个Basicblock中。
+    - 建模通道之间的关系，通过网络的全局损失函数自适应的重新矫正通道之间的特征相应强度。是一个c尺度的attention，通过global pool(->c\*1\*1)+FC+sigmoid得到attention系数。对于Resnet来说，可以加入每一个Basicblock中。
 
 - [CBAM: Convolutional Block Attention Module](https://arxiv.org/abs/1807.06521) (ECCV2018)
     - 3分
     - channel-wise attention + spatial-wise attention。论文中称两者分别为'look what'和'look where'。
-    - 在SEnet的基础上加了一个spatial-wise attention。这是一个h\*w尺度的attention，通过channel-wise pool(->2\*h*w)+conv+sigmoid得到attention系数，同样可以加入每一个Basicblock中。
+    - 在SEnet的基础上加了一个spatial-wise attention。这是一个h\*w尺度的attention，通过channel-wise pool(->2\*h\*w)+conv+sigmoid得到attention系数，同样可以加入每一个Basicblock中。
 
 - [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861) (CVPR2017)
     - 4分

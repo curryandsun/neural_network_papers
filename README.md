@@ -28,6 +28,8 @@
 
     - [Domain Shift](https://github.com/curryandsun/neural_network_papers/tree/main/Domain%20Shift)
 
+    - [Uncertainty](https://github.com/curryandsun/neural_network_papers/tree/main/Uncertainty)
+
     - [Adversarial Attack](https://github.com/curryandsun/neural_network_papers/tree/main/Adversarial%20Attack)
 
 

@@ -2,11 +2,17 @@
 
 - [Table of Contents](#table-of-contents)
 - [Domain Adaptation](#domain-adaptation)
-- [OOD Generalization](#ood-generalization)
+  - [Unsupervised Domain Adaptation](#unsupervised-domain-adaptation)
+  - [Open-set Domain Adaptation](#open-set-domain-adaptation)
+- [Domain Generalization](#domain-generalization)
 
 # Domain Adaptation
 
 > 领域自适应。以下以S表示source domain，T表示target domain。
+
+## Unsupervised Domain Adaptation
+
+> target domain数据没有label，最主要的DA场景。
 
 - [ToAlign: Task-oriented Alignment for Unsupervised Domain Adaptation](https://arxiv.org/abs/2106.10812) (NIPS2021)
     - 3分
@@ -50,10 +56,22 @@
     - 5分
     - The maximization of the domain classification loss in [DANN](https://arxiv.org/abs/1412.4446) is replaced by the minimization of the Maximum Mean Discrepancy (MMD) metric. MMD度量了S和T上features分布的差异，最小化MMD相当于对两个domain上的features做了一个confusion。 
 
+## Open-set Domain Adaptation
 
-# OOD Generalization
+> 在DA中考虑open-set的类别，包括open-set DA和universal DA。
 
-> 包括Domain Generalization(通常关注multi-source training data的图片分类问题)，具体概念可以参考[关于OOD generalization的综述](https://arxiv.org/abs/2108.13624)。其与Domain Adaptation的区别在于训练时没有target domain的知识，因此是一个更难的任务。其中DG又分为有或没有domain-label的两种setting，现在的研究更关注后者。
+- [Open Set Domain Adaptation](http://openaccess.thecvf.com/content_ICCV_2017/papers/Busto_Open_Set_Domain_ICCV_2017_paper.pdf) (ICCV2019)
+    - 5分
+    - 新setting：考虑DA中S和T都存在unknown class，且S和T中的unknown class互相不重叠。在测试时，将所有unknown class考虑为同一个类，即需要进行K+1的分类任务，此时考虑open-set acc即可。为了和closed-set进行对比，也考虑closed-set acc。
+    - 这个问题的难点在于如何让DA中的feature alignment只在shared class上做，而消除unknown class的负面影响。
+    - 方法核心类似于self-training，分为两步迭代进行：
+      - 根据T与S上的feature的距离，给T上的样本打pseudo label（包括unknown）。
+      - 根据pseudo label，将S的feature做映射，使得S与T上相同类（不包括unknown）的feature尽可能接近。这一步相当于DA中经典的feature alignment，且只在shared class中的相同类上做，忽略了unknown class。
+
+
+# Domain Generalization
+
+> Domain Generalization通常关注multi-source training data的图片分类问题，类似的概念有[OOD generalization](https://arxiv.org/abs/2108.13624)。DG与DA的区别在于前者训练时target domain是未知，因此是一个更难但更泛化的任务。其中DG又分为有或没有domain-label的两种setting，现在的研究更关注后者。
 
 - [A Style and Semantic Memory Mechanism for Domain Generalization](https://arxiv.org/abs/2112.07517) (ICCV2021)
     - 3分
