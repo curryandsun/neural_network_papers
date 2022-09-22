@@ -20,7 +20,7 @@
 # Table of Contents
 
 - Towards Robust Deep Learning
-    - [OOD](https://github.com/curryandsun/neural_network_papers/tree/main/OOD)
+    - [OOD Detection](https://github.com/curryandsun/neural_network_papers/tree/main/OOD%20Detection)
 
     - [Long-tail](https://github.com/curryandsun/neural_network_papers/tree/main/Long-tail)
 
@@ -46,5 +46,7 @@
     - [Neural Network](https://github.com/curryandsun/neural_network_papers/tree/main/Neural%20Network)
 
     - [Knowledge Distilling](https://github.com/curryandsun/neural_network_papers/tree/main/Knowledge%20Distilling)
+
+    - [Treatment Effect Estimation](https://github.com/curryandsun/neural_network_papers/tree/main/Treatment%20Effect%20Estimation)
 
     - [GCN](https://github.com/curryandsun/neural_network_papers/tree/main/GCN)
